@@ -29,6 +29,7 @@ public class SecurityConfig {
         String publicApis[] = {"/test"};
 
 
+//       api/** ==> /** is used to apply Secure or allow a group of APIs at once and it is called path wildcard
         String adminUrls[] = {"/api/**"};
         String superAdminUrls[] = {"/api/super-admin/**"};
 
