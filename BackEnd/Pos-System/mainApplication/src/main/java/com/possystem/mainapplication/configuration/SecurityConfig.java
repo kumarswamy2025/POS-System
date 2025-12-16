@@ -2,6 +2,7 @@ package com.possystem.mainapplication.configuration;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.jspecify.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -21,6 +22,11 @@ import java.util.Collections;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+//    dependencies
+    @Autowired
+    private  JwtValidator jwtValidator;
+
 
 
     @Bean
@@ -53,7 +59,7 @@ public class SecurityConfig {
 //                        rest of urls no need to authenticate
                         .anyRequest().permitAll())
 //  add filter
-                .addFilterBefore(new JwtValidator(),
+                .addFilterBefore(jwtValidator,
 //                        this BasicAuthenticationFilter.class is used to verify each request every time
                         BasicAuthenticationFilter.class)
                 // disable csrf
