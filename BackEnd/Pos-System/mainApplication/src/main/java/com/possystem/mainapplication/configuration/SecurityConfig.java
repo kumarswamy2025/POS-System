@@ -53,7 +53,9 @@ public class SecurityConfig {
 //                        rest of urls no need to authenticate
                         .anyRequest().permitAll())
 //  add filter
-                .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JwtValidator(),
+//                        this BasicAuthenticationFilter.class is used to verify each request every time
+                        BasicAuthenticationFilter.class)
                 // disable csrf
                 .csrf(csrf -> csrf.disable())
 //                disable cors
