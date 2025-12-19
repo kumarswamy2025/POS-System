@@ -17,4 +17,7 @@ public class Test {
     public String Demo(){
         return  "Hello world...";
     }
+    public String main(){
+        return  "main";
+    }
 }
