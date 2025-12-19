@@ -9,19 +9,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test {
 
     @GetMapping("/")
-    public String Home(){
+    public String Home() {
         return "Home...";
     }
 
     @GetMapping("/test")
-    public String Demo(){
-        return  "Hello world...";
-    }
-    public String main(){
-        return  "main";
+    public String Demo() {
+        return "Hello world...";
     }
 
- public  String kumar(){
+    public String main() {
+        return "main";
+    }
+
+    public String kumar() {
         return "kuamr";
- }
+    }
+
+    public  String main2(){
+        return "main2";
+    }
 }
