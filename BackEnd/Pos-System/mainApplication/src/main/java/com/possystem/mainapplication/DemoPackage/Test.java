@@ -33,5 +33,7 @@ public class Test {
         return "kumar 2";
     }
 
-
+    public  String kumar3(){
+        return "kumar 3";
+    }
 }
