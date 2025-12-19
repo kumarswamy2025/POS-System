@@ -17,12 +17,17 @@ import java.util.Set;
 public class JwtProvider {
 
 //    autowired JwtService bean
-    @Autowired
+//    @Autowired
     private  JwtService jwtService;
 
     //        generate secreate key
 
-   private SecretKey key=jwtService.generateKey();
+   private SecretKey key;
+//   here we using constractor  dependency injection
+    public JwtProvider(JwtService jwtService) {
+        this.jwtService = jwtService;
+        this.key = jwtService.generateKey(); // ✅ SAFE
+    }
 
     public  String  generateToken(Authentication authentication){
 

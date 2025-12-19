@@ -31,6 +31,9 @@ public class UserModal {
     @Column(nullable = false)
     private UserRole role;
 
+    @Column(nullable = false)
+    private  String password;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
