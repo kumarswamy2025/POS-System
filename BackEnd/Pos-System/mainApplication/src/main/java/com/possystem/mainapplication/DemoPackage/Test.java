@@ -36,4 +36,9 @@ public class Test {
     public  String kumar3(){
         return "kumar 3";
     }
+    public String main3(){
+        return "main3";
+    }
+
+
 }
