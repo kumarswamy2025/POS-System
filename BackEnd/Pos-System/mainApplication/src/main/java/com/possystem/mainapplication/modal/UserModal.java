@@ -18,12 +18,12 @@ import java.time.LocalDateTime;
 public class UserModal {
 
     @Id
-    private  Long ID;
+    private Long ID;
 
     @Column(nullable = false)
-    private  String fullName;
+    private String fullName;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     @Email(message = "Email should be valid...")
     private String email;
     private String phone;
@@ -32,11 +32,8 @@ public class UserModal {
     private UserRole role;
 
     private LocalDateTime createdAt;
-    private  LocalDateTime updatedAt;
-    private  LocalDateTime lastLogin;
-
-
-
+    private LocalDateTime updatedAt;
+    private LocalDateTime lastLogin;
 
 
 
