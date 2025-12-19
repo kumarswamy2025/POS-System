@@ -16,6 +16,11 @@ import java.util.Set;
 @Service
 public class JwtProvider {
 
+    /*
+     * This class is used to generate token when new user logins
+     *
+     * */
+
 //    autowired JwtService bean
 //    @Autowired
     private  JwtService jwtService;
