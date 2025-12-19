@@ -29,4 +29,9 @@ public class Test {
     public  String main2(){
         return "main2";
     }
+    public  String kumar2(){
+        return "kumar 2";
+    }
+
+
 }
