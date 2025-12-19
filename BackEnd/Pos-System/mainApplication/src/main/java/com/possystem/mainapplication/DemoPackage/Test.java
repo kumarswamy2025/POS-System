@@ -40,5 +40,9 @@ public class Test {
         return "main3";
     }
 
+    public String validator_class(){
+        return "validator_class";
+    }
+
 
 }
