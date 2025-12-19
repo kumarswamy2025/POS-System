@@ -20,4 +20,8 @@ public class Test {
     public String main(){
         return  "main";
     }
+
+ public  String kumar(){
+        return "kuamr";
+ }
 }
