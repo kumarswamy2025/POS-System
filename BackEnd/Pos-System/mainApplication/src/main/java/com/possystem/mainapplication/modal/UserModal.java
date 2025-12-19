@@ -26,7 +26,6 @@ public class UserModal {
     @Column(nullable = false,unique = true)
     @Email(message = "Email should be valid...")
     private String email;
-
     private String phone;
 
     @Column(nullable = false)
@@ -35,6 +34,10 @@ public class UserModal {
     private LocalDateTime createdAt;
     private  LocalDateTime updatedAt;
     private  LocalDateTime lastLogin;
+
+
+
+
 
 
 
