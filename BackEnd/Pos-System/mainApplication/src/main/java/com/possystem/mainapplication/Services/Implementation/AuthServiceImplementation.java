@@ -60,19 +60,12 @@ public class AuthServiceImplementation implements AuthService {
 
 //        here we generate jwt token for who newly register
 
-        String jwtToken=jwtProvider.generateToken(authentication);
+        String jwtToken = jwtProvider.generateToken(authentication);
 
 //        here we return auth response
-        AuthResponse authResponse=AuthResponse.builder()
-                .jwt(jwtToken)
-                .message("Registered successfully...")
-                .userDTO(
+        AuthResponse authResponse = AuthResponse.builder().jwt(jwtToken).message("Registered successfully...").userDTO(
 //                        here we converting user modal to user dto
-                        UserMapper.toDTO(savedUser))
-                .build();
-
-
-
+                UserMapper.toDTO(savedUser)).build();
 
 
         return authResponse;
@@ -80,6 +73,13 @@ public class AuthServiceImplementation implements AuthService {
 
     @Override
     public AuthResponse login(UserDTO userDTO) {
+//        getting email FROM user dto
+        String email = userDTO.getEmail();
+//        gettig password from user DTO
+        String password = userDTO.getPassword();
+
+
+
         return null;
     }
 }
