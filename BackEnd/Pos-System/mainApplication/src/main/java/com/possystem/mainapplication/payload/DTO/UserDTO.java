@@ -4,12 +4,13 @@ import com.possystem.mainapplication.domain.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-
+@Builder
 public class UserDTO {
     private Long ID;
     private String fullName;

@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class UserModal {
 
     @Id
@@ -22,25 +23,17 @@ public class UserModal {
 
     @Column(nullable = false)
     private String fullName;
-
     @Column(nullable = false, unique = true)
     @Email(message = "Email should be valid...")
     private String email;
     private String phone;
-
     @Column(nullable = false)
     private UserRole role;
-
     @Column(nullable = false)
-    private  String password;
-
+    private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
-
-
-
-
 
 
 }
