@@ -1,8 +1,14 @@
 package com.possystem.mainapplication.controller;
 
 import com.possystem.mainapplication.Services.AuthService;
+import com.possystem.mainapplication.exceptions.UserExceptions;
+import com.possystem.mainapplication.payload.DTO.UserDTO;
+import com.possystem.mainapplication.payload.response.AuthResponse;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +21,24 @@ public class AuthController {
 
 //    http:localhost:8080/auth/signup
 
+    @PostMapping("/signup")
+    public ResponseEntity<AuthResponse> signupHandler(@RequestBody UserDTO userDTO) throws UserExceptions {
 
+        return ResponseEntity.ok(
+                authService.signup(userDTO)
+        );
+
+    }
+//    http:localhost:8080/auth/login
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> loginHandler(@RequestBody UserDTO userDTO) throws UserExceptions {
+
+        return ResponseEntity.ok(
+                authService.login(userDTO)
+        );
+
+    }
 
 
 
