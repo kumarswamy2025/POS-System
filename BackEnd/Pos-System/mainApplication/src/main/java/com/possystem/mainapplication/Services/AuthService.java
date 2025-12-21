@@ -7,6 +7,6 @@ public interface AuthService {
 
 AuthResponse signup(UserDTO userDTO) throws UserExceptions;
 
-AuthResponse login(UserDTO userDTO);
+AuthResponse login(UserDTO userDTO) throws UserExceptions;
 
 }

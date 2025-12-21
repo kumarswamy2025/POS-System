@@ -12,11 +12,14 @@ import com.possystem.mainapplication.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor // this annotation is used to implement constractor injection dependency
@@ -72,14 +75,68 @@ public class AuthServiceImplementation implements AuthService {
     }
 
     @Override
-    public AuthResponse login(UserDTO userDTO) {
+    public AuthResponse login(UserDTO userDTO) throws UserExceptions {
 //        getting email FROM user dto
         String email = userDTO.getEmail();
 //        gettig password from user DTO
         String password = userDTO.getPassword();
 
+//        here we get authentication object
+        Authentication authentication = authentication(email, password);
+
+        System.out.println("this is authentication object in loged :"+authentication);
+//        here we save authentication object in SecurityContextHolder
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+//        getting authorities
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+//         getting role ofmlogedin user
+        String role = authorities.iterator().next().getAuthority();
+
+//        generate jwt token
+        String jwtToken = jwtProvider.generateToken(authentication);
+
+//        fetching user data from repo
+        UserModal userModal = userRepo.findByEmail(email);
+
+//        update last logedin time
+        userModal.setLastLogin(LocalDateTime.now());
+
+//        save the user
+        userRepo.save(userModal);
+
+//        here we return auth response
+
+        AuthResponse authResponse = AuthResponse.builder().jwt(jwtToken).message("LogedIn successfully....").userDTO(
+//                        here we converting user modal to user dto
+                UserMapper.toDTO(userModal)).build();
 
 
-        return null;
+        return authResponse;
+    }
+
+//    this method will check user exits or not
+//    check password is valid or not
+//    return authentication object
+
+    private Authentication authentication(String email, String password) throws UserExceptions {
+
+//        fetch user details from
+        UserDetails userDetails = customUserImplementation.loadUserByUsername(email);
+//        checking if user is exits or not
+        if (userDetails == null) {
+            throw new UserExceptions("please enter valid Email...");
+        }
+
+//        checking if user password is correct or not
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+
+            throw new UserExceptions("invalid password....");
+        }
+
+
+//        here we return authentication object to save in SecurityContextHolder
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 }
