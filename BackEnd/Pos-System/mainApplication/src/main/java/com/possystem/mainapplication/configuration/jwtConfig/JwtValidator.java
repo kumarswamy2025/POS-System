@@ -34,7 +34,7 @@ public class JwtValidator extends OncePerRequestFilter {
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 
         //       checking if header  and header starts with Bearer or not
-        if (jwt == null || !jwt.startsWith("Bearer")) {
+        if (jwt != null ) {
             jwt = jwt.substring(7);
             try {
 

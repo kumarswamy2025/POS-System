@@ -10,6 +10,7 @@ import com.possystem.mainapplication.payload.DTO.UserDTO;
 import com.possystem.mainapplication.payload.response.AuthResponse;
 import com.possystem.mainapplication.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,16 +23,18 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Service
-@RequiredArgsConstructor // this annotation is used to implement constractor injection dependency
+@RequiredArgsConstructor // this annotation is used to implement constractor injection dependency  Note: if we want contractor injection means we have to use final or @NonNull fields
 public class AuthServiceImplementation implements AuthService {
 
+    @Autowired
     private UserRepo userRepo;  // here automatically injects required dependency it can be done by lombok
 
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
     private JwtProvider jwtProvider;
-
+    @Autowired
     private CustomUserImplementation customUserImplementation;
 
 
