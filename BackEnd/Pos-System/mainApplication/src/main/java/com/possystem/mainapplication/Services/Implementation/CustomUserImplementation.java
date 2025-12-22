@@ -1,8 +1,10 @@
 package com.possystem.mainapplication.Services.Implementation;
 
+import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +25,7 @@ public class CustomUserImplementation implements UserDetailsService {
     private UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email)  {
 
 //        finding user details from DB note: here we using jpa repo
         UserModal userModal = userRepo.findByEmail(email);
@@ -32,6 +34,7 @@ public class CustomUserImplementation implements UserDetailsService {
 
         if (Objects.isNull(userModal)) {
             throw new UsernameNotFoundException("user not found.....");
+//            throw new UserExceptions("user not found.....",HttpStatus.NOT_FOUND);
         }
 
 //        simple granted authority class
