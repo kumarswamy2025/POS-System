@@ -3,7 +3,7 @@ package com.possystem.mainapplication.Services.Implementation;
 import com.possystem.mainapplication.Services.AuthService;
 import com.possystem.mainapplication.configuration.jwtConfig.JwtProvider;
 import com.possystem.mainapplication.domain.UserRole;
-import com.possystem.mainapplication.exceptions.UserExceptions;
+import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.mapper.UserMapper;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
@@ -11,6 +11,7 @@ import com.possystem.mainapplication.payload.response.AuthResponse;
 import com.possystem.mainapplication.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,12 +45,12 @@ public class AuthServiceImplementation implements AuthService {
 //        here we check if email is already exits or not
         UserModal checkingEmail = userRepo.findByEmail(userDTO.getEmail());
         if (checkingEmail != null) {
-            throw new UserExceptions("email is already exits..");
+            throw new UserExceptions("email is already exits..", HttpStatus.CONFLICT);
         }
 
 //        here we checking if user ready to create ROLE_ADMIN so we have to throw an exception
         if (userDTO.getRole().equals(UserRole.ROLE_ADMIN)) {
-            throw new UserExceptions("role admin is not allowed...");
+            throw new UserExceptions("role admin is not allowed...",HttpStatus.FORBIDDEN);
         }
 
 //        creating new user
@@ -129,13 +130,13 @@ public class AuthServiceImplementation implements AuthService {
         UserDetails userDetails = customUserImplementation.loadUserByUsername(email);
 //        checking if user is exits or not
         if (userDetails == null) {
-            throw new UserExceptions("please enter valid Email...");
+            throw new UserExceptions("please enter valid Email...",HttpStatus.BAD_REQUEST);
         }
 
 //        checking if user password is correct or not
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
 
-            throw new UserExceptions("invalid password....");
+            throw new UserExceptions("invalid password....",HttpStatus.BAD_REQUEST);
         }
 
 

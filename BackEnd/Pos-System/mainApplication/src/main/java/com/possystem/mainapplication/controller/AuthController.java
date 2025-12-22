@@ -1,10 +1,9 @@
 package com.possystem.mainapplication.controller;
 
 import com.possystem.mainapplication.Services.AuthService;
-import com.possystem.mainapplication.exceptions.UserExceptions;
+import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
 import com.possystem.mainapplication.payload.response.AuthResponse;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
