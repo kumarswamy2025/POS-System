@@ -11,12 +11,13 @@ import java.util.HashMap;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserExceptions.class)
-    public ResponseEntity<?> UserExceptionsHandler( UserExceptions ex){
-        HashMap<String, String> errorResponse=new HashMap<>();
-        errorResponse.put("Message",ex.getMessage());
+    public ResponseEntity<?> UserExceptionsHandler(UserExceptions ex) {
+        HashMap<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("Message", ex.getMessage());
+        errorResponse.put("status code", ex.getStatus().toString());
 
 
-        return  new ResponseEntity<>()
+        return new ResponseEntity<>(errorResponse, ex.getStatus());
 
     }
 
