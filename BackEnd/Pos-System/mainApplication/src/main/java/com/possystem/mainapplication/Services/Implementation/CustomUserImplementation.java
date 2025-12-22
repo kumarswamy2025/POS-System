@@ -23,10 +23,10 @@ public class CustomUserImplementation implements UserDetailsService {
     private UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 //        finding user details from DB note: here we using jpa repo
-        UserModal userModal = userRepo.findByEmail(username);
+        UserModal userModal = userRepo.findByEmail(email);
 
         System.out.println("user modal :"+userModal);
 
