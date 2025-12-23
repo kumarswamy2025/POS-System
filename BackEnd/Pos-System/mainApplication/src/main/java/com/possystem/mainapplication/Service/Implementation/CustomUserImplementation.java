@@ -1,10 +1,8 @@
-package com.possystem.mainapplication.Services.Implementation;
+package com.possystem.mainapplication.Service.Implementation;
 
-import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
