@@ -57,6 +57,7 @@ public class AuthServiceImplementation implements AuthService {
 // here iam using builder patterns to make objects simple
         UserModal newUser = UserModal.builder().fullName(userDTO.getFullName()).email(userDTO.getEmail()).phone(userDTO.getPhone()).role(userDTO.getRole()).password(passwordEncoder.encode(userDTO.getPassword())).createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).lastLogin(LocalDateTime.now()).build();
 
+        System.out.println("new user Data:"+newUser);
 //        save user
         UserModal savedUser = userRepo.save(newUser);
 
