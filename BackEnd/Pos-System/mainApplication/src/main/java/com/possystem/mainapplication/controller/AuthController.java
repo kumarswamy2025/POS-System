@@ -1,6 +1,6 @@
 package com.possystem.mainapplication.controller;
 
-import com.possystem.mainapplication.Services.AuthService;
+import com.possystem.mainapplication.Service.Services.AuthService;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
 import com.possystem.mainapplication.payload.response.AuthResponse;

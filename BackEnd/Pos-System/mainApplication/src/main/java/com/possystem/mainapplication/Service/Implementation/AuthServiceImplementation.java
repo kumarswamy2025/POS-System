@@ -1,6 +1,6 @@
-package com.possystem.mainapplication.Services.Implementation;
+package com.possystem.mainapplication.Service.Implementation;
 
-import com.possystem.mainapplication.Services.AuthService;
+import com.possystem.mainapplication.Service.Services.AuthService;
 import com.possystem.mainapplication.configuration.jwtConfig.JwtProvider;
 import com.possystem.mainapplication.domain.UserRole;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;

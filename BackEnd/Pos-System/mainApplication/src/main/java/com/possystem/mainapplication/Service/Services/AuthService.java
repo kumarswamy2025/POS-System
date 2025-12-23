@@ -1,4 +1,4 @@
-package com.possystem.mainapplication.Services;
+package com.possystem.mainapplication.Service.Services;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
 import com.possystem.mainapplication.payload.response.AuthResponse;
