@@ -34,20 +34,32 @@ public class JwtProvider {
         this.key = jwtService.generateKey(); // ✅ SAFE
     }
 
+
+
+
+
     public  String  generateToken(Authentication authentication){
 
+//     tested key
 
+//        System.out.println("key :"+key);
 
 //        we get authorities
         Collection<? extends GrantedAuthority> authorities=authentication.getAuthorities();
 
         String roles=populateAuthorities(authorities);
 
+//        here no roles are comming
+//        tested successfully
+//        System.out.println("generated token roles:"+roles);
+
+
         return Jwts.builder()
                 .issuedAt(new Date())
                 .expiration(new Date(new Date().getTime()+8640000))
                 .claim("email",authentication.getName())
                 .claim("authorities",roles)
+                .signWith(key, Jwts.SIG.HS256)
                 .compact()
                 ;
 

@@ -27,8 +27,8 @@ public class CustomUserImplementation implements UserDetailsService {
 
 //        finding user details from DB note: here we using jpa repo
         UserModal userModal = userRepo.findByEmail(email);
-
-        System.out.println("user modal :"+userModal);
+// tested successfully
+//        System.out.println("user modal :"+userModal);
 
         if (Objects.isNull(userModal)) {
             throw new UsernameNotFoundException("user not found.....");
@@ -39,12 +39,13 @@ public class CustomUserImplementation implements UserDetailsService {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userModal.getRole().toString());
 
 
-        System.out.println("grantedAuthority data: "+grantedAuthority);
+//        tested successfully
+//        System.out.println("grantedAuthority data: "+grantedAuthority);
 
 //        here we convert granted authorities into list
         Collection<GrantedAuthority> authorities= Collections.singletonList(grantedAuthority);
-
-        System.out.println("authorities data :"+authorities);
+// tested successfully
+//        System.out.println("authorities data :"+authorities);
 
 //        this is shortcut for implements  UserDetails interface
         return new User(

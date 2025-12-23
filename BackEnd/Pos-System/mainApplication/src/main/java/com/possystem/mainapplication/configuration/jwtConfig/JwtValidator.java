@@ -33,6 +33,7 @@ public class JwtValidator extends OncePerRequestFilter {
 
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
 
+        System.out.println("jwt: "+jwt);
         //       checking if header  and header starts with Bearer or not
         if (jwt != null ) {
             jwt = jwt.substring(7);
@@ -43,12 +44,12 @@ public class JwtValidator extends OncePerRequestFilter {
 //    and jwt token is different for every request because playload chanegs,time changes and uses many factors to change jwt token
 
                 SecretKey key = Keys.hmacShaKeyFor(JwtConstant.JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-                System.out.println("Generated sereate key:" + key);
-
+//                System.out.println("Generated sereate key:" + key);
+//
 //                creating claims
                 Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
 
-                System.out.println("claims play load:" + claims);
+//                System.out.println("claims play load:" + claims);
 
 //                we extracting email from  claims
                 String email = String.valueOf(claims.get("email"));
@@ -59,18 +60,18 @@ public class JwtValidator extends OncePerRequestFilter {
 //                here we convert authorites in comma separated values as list
                 List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
 
-                System.out.println("auths result: " + auths);
+//                System.out.println("auths result: " + auths);
 
 //                here we validate email
                 Authentication auth = new UsernamePasswordAuthenticationToken(email, null, auths);
 
-                System.out.println("security context before inisalization :" + SecurityContextHolder.getContext());
+//                System.out.println("security context before inisalization :" + SecurityContextHolder.getContext());
 
 //                we save auth result in security context holder
                 SecurityContextHolder.getContext().setAuthentication(auth);
 
 //                printing secuirty context
-                System.out.println("security context after inisalization :" + SecurityContextHolder.getContext());
+//                System.out.println("security context after inisalization :" + SecurityContextHolder.getContext());
 
 
             } catch (Exception e) {
