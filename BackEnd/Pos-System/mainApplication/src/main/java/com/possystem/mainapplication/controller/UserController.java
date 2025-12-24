@@ -1,6 +1,7 @@
 package com.possystem.mainapplication.controller;
 
 import com.possystem.mainapplication.Service.Services.UserService;
+import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.mapper.UserMapper;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
@@ -8,6 +9,7 @@ import com.possystem.mainapplication.payload.DTO.UserProfileDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,9 @@ public class UserController {
     public ResponseEntity<UserProfileDTO> getUserById(@PathVariable("id") Long id) {
 
         UserModal user = userService.getUserById(id);
+        if(user==null){
+            throw  new UserExceptions("User not found....", HttpStatus.NOT_FOUND);
+        }
         UserProfileDTO result = modelMapper.map(user, UserProfileDTO.class);
 //        System.out.println("this is user profile DTO:" + result);
         return ResponseEntity.ok(result);
