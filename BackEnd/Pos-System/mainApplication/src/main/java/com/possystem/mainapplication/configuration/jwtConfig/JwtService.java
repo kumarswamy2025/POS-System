@@ -21,13 +21,25 @@ public class JwtService {
 //   extract mail from toke
     public  String getEmailFromToken(String jwtToken){
 
-        Claims claims
-                = Jwts.parser()
+        if (jwtToken == null || jwtToken.isBlank()) {
+            throw new IllegalArgumentException("JWT token is null or empty");
+        }
+
+        // ✅ Strip Bearer if someone passes header by mistake
+        if (jwtToken.startsWith("Bearer ")) {
+            jwtToken = jwtToken.substring(7);
+        }
+
+        jwtToken = jwtToken.trim(); // 🔥 VERY IMPORTANT
+
+        Claims claims = Jwts.parser()
                 .verifyWith(generateKey())
                 .build()
                 .parseSignedClaims(jwtToken)
                 .getPayload();
+
         return String.valueOf(claims.get("email"));
+
 
     }
 
