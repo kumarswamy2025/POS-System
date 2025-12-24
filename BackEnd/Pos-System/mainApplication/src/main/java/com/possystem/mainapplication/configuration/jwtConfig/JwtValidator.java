@@ -38,14 +38,14 @@ public class JwtValidator extends OncePerRequestFilter {
                 || !authHeader.startsWith("Bearer ")
         ) {
 
-            System.out.println("this is excuted...");
+//            System.out.println("this is excuted...");
             filterChain.doFilter(request, response);
             return;
         }
 
 
         String jwt = authHeader.substring(7).trim();
-        System.out.println("jwtL:"+jwt);
+//        System.out.println("jwtL:"+jwt);
 
 //        System.out.println("jwt: "+jwt);
         //       checking if header  and header starts with Bearer or not
@@ -63,7 +63,7 @@ public class JwtValidator extends OncePerRequestFilter {
 //                creating claims
             Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
 
-                System.out.println("claims play load:" + claims);
+//                System.out.println("claims play load:" + claims);
 
 //                we extracting email from  claims
             String email = String.valueOf(claims.get("email"));

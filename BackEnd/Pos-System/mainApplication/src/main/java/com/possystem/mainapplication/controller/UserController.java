@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/kumar")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -22,10 +22,10 @@ public class UserController {
     @GetMapping("/profile")
     public ResponseEntity<UserProfileDTO> getUserProfile(@RequestHeader("Authorization") String JwtToken) {
 
-        System.out.println("jwtToken:"+JwtToken);
+//        System.out.println("jwtToken:"+JwtToken);
         UserModal user = userService.getUserFromJWTToken(JwtToken);
         UserProfileDTO result = modelMapper.map(user, UserProfileDTO.class);
-        System.out.println("this is user profile DTO:" + result);
+//        System.out.println("this is user profile DTO:" + result);
         return ResponseEntity.ok(result);
 
     }
@@ -35,7 +35,7 @@ public class UserController {
 
         UserModal user = userService.getUserById(id);
         UserProfileDTO result = modelMapper.map(user, UserProfileDTO.class);
-        System.out.println("this is user profile DTO:" + result);
+//        System.out.println("this is user profile DTO:" + result);
         return ResponseEntity.ok(result);
 
     }
