@@ -26,6 +26,7 @@ public class StoreModal {
     private String description;
     private String storeType;
     private StoreStatus status;
+    @Embedded
     private StoreAddress contact;
 
 // ✔️ Runs only once, when the entity is first persisted.
