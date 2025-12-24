@@ -15,8 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StoreServiceImplementation implements StoreService {
 
-    private UserRepo userRepo;
-    private StoreRepo storeRepo;
+    private final UserRepo userRepo;
+    private final StoreRepo storeRepo;
 
 
     @Override
