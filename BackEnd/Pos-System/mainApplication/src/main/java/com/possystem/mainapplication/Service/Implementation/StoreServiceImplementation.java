@@ -1,6 +1,7 @@
 package com.possystem.mainapplication.Service.Implementation;
 
 import com.possystem.mainapplication.Service.Services.StoreService;
+import com.possystem.mainapplication.mapper.StoreMapper;
 import com.possystem.mainapplication.modal.StoreModal;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.StoreDTO;
@@ -22,8 +23,16 @@ public class StoreServiceImplementation implements StoreService {
     @Override
     public StoreDTO createStore(StoreDTO storeDTO, UserModal userModal) {
 
+//        DTO to entity
+        StoreModal storeModal = StoreMapper.toEntity(storeDTO, userModal);
+        StoreModal savedData = storeRepo.save(storeModal);
 
-        return null;
+//        entity to DTO
+        StoreDTO dto=StoreMapper.toDTO(savedData);
+
+
+
+        return dto;
     }
 
     @Override
