@@ -30,57 +30,75 @@ public class JwtValidator extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String authHeader = request.getHeader(JwtConstant.JWT_HEADER);
 
-        String jwt = request.getHeader(JwtConstant.JWT_HEADER);
+        System.out.println(authHeader);
+        // ✅ 1. Skip filter if no token or wrong format
+        if (authHeader == null
+                || !authHeader.startsWith("Bearer ")
+        ) {
 
+//            System.out.println("this is excuted...");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+
+        String jwt = authHeader.substring(7).trim();
+//        System.out.println("jwtL:"+jwt);
+
+//        System.out.println("jwt: "+jwt);
         //       checking if header  and header starts with Bearer or not
-        if (jwt != null ) {
-            jwt = jwt.substring(7);
-            try {
+
+//        jwt = jwt.substring(7);
+        try {
 
 //               generate secreate key
 //    note : this is seecreat  key same for every request
 //    and jwt token is different for every request because playload chanegs,time changes and uses many factors to change jwt token
 
-                SecretKey key = Keys.hmacShaKeyFor(JwtConstant.JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-                System.out.println("Generated sereate key:" + key);
-
+            SecretKey key = Keys.hmacShaKeyFor(JwtConstant.JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+//                System.out.println("Generated sereate key:" + key);
+//
 //                creating claims
-                Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
+            Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
 
-                System.out.println("claims play load:" + claims);
+//                System.out.println("claims play load:" + claims);
 
 //                we extracting email from  claims
-                String email = String.valueOf(claims.get("email"));
+            String email = String.valueOf(claims.get("email"));
 
 //                we get authorites
-                String authorities = String.valueOf(claims.get("authorities"));
+            String authorities = String.valueOf(claims.get("authorities"));
 
 //                here we convert authorites in comma separated values as list
-                List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+            List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
 
-                System.out.println("auths result: " + auths);
+//                System.out.println("auths result: " + auths);
 
 //                here we validate email
-                Authentication auth = new UsernamePasswordAuthenticationToken(email, null, auths);
+            Authentication auth = new UsernamePasswordAuthenticationToken(email, null, auths);
 
-                System.out.println("security context before inisalization :" + SecurityContextHolder.getContext());
+//                System.out.println("security context before inisalization :" + SecurityContextHolder.getContext());
 
 //                we save auth result in security context holder
-                SecurityContextHolder.getContext().setAuthentication(auth);
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
 //                printing secuirty context
-                System.out.println("security context after inisalization :" + SecurityContextHolder.getContext());
+//                System.out.println("security context after inisalization :" + SecurityContextHolder.getContext());
 
 
-            } catch (Exception e) {
-                throw new BadCredentialsException("Invalid JWT.....");
-
-
-            }
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT expired");
+            return;
+        }
+        catch (io.jsonwebtoken.JwtException e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT"+e);
+            return;
         }
 
-        filterChain.doFilter(request,response);
+
+        filterChain.doFilter(request, response);
 
 
     }

@@ -31,11 +31,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
 //        no authentication is required for these apis
-        String publicApis[] = {"/test"};
+        String publicApis[] = {"/swamy"};
+
 
 
 //       api/** ==> /** is used to apply Secure or allow a group of APIs at once and it is called path wildcard
-        String adminUrls[] = {"/api/**"};
+        String adminUrls[] = {"/api/**","/test/**"};
         String superAdminUrls[] = {"/api/super-admin/**"};
 
 

@@ -24,7 +24,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Service
-@RequiredArgsConstructor // this annotation is used to implement constractor injection dependency  Note: if we want contractor injection means we have to use final or @NonNull fields
+@RequiredArgsConstructor
+// this annotation is used to implement constractor injection dependency  Note: if we want contractor injection means we have to use final or @NonNull fields
 public class AuthServiceImplementation implements AuthService {
 
     @Autowired
@@ -50,25 +51,30 @@ public class AuthServiceImplementation implements AuthService {
 
 //        here we checking if user ready to create ROLE_ADMIN so we have to throw an exception
         if (userDTO.getRole().equals(UserRole.ROLE_ADMIN)) {
-            throw new UserExceptions("role admin is not allowed...",HttpStatus.FORBIDDEN);
+            throw new UserExceptions("role admin is not allowed...", HttpStatus.FORBIDDEN);
         }
 
 //        creating new user
 // here iam using builder patterns to make objects simple
         UserModal newUser = UserModal.builder().fullName(userDTO.getFullName()).email(userDTO.getEmail()).phone(userDTO.getPhone()).role(userDTO.getRole()).password(passwordEncoder.encode(userDTO.getPassword())).createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).lastLogin(LocalDateTime.now()).build();
 
+//        tested sucessfully
+//        System.out.println("new user Data:"+newUser);
 //        save user
         UserModal savedUser = userRepo.save(newUser);
 
 //        creating authentication object
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword());
+// tested successfully
+//        System.out.println("authentication objecte:"+authentication);
 // save authetication object in, to security context holder
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
 //        here we generate jwt token for who newly register
 
         String jwtToken = jwtProvider.generateToken(authentication);
-
+//tested successfully
+//        System.out.println("jwt token:"+jwtToken);
 //        here we return auth response
         AuthResponse authResponse = AuthResponse.builder().jwt(jwtToken).message("Registered successfully...").userDTO(
 //                        here we converting user modal to user dto
@@ -87,17 +93,21 @@ public class AuthServiceImplementation implements AuthService {
 
 //        here we get authentication object
         Authentication authentication = authentication(email, password);
+// tested successfully
+//        System.out.println("authentication object form login:"+authentication);
 
-        System.out.println("this is authentication object in loged :"+authentication);
+//        tested successfully
+//        System.out.println("this is authentication object in loged :"+authentication);
 //        here we save authentication object in SecurityContextHolder
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
 //        getting authorities
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
+//        System.out.println("authorities : "+authorities);
 //         getting role ofmlogedin user
         String role = authorities.iterator().next().getAuthority();
-
+//        System.out.println("role : "+role);
 //        generate jwt token
         String jwtToken = jwtProvider.generateToken(authentication);
 
@@ -130,13 +140,13 @@ public class AuthServiceImplementation implements AuthService {
         UserDetails userDetails = customUserImplementation.loadUserByUsername(email);
 //        checking if user is exits or not
         if (userDetails == null) {
-            throw new UserExceptions("please enter valid Email...",HttpStatus.BAD_REQUEST);
+            throw new UserExceptions("please enter valid Email...", HttpStatus.BAD_REQUEST);
         }
 
 //        checking if user password is correct or not
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
 
-            throw new UserExceptions("invalid password....",HttpStatus.BAD_REQUEST);
+            throw new UserExceptions("invalid password....", HttpStatus.BAD_REQUEST);
         }
 
 
