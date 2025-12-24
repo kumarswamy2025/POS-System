@@ -25,8 +25,21 @@ public class StoreModal {
     private LocalDateTime updatedAt;
     private String description;
     private String storeType;
-    private StoreStatus storeStatus;
+    private StoreStatus status;
     private StoreAddress contact;
+
+// ✔️ Runs only once, when the entity is first persisted.
+    @PrePersist
+    protected  void onCreate(){
+        createdAt=LocalDateTime.now();
+        status =StoreStatus.PENDING;
+    }
+
+// ✔️ Runs every time the entity is updated.
+    @PreUpdate
+    protected  void onUpdate(){
+        updatedAt=LocalDateTime.now();
+    }
 
 
 }
