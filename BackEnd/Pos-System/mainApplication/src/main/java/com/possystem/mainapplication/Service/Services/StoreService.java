@@ -14,7 +14,7 @@ public interface StoreService {
     List<StoreDTO> getAllStores();
     StoreModal getStoreByAdmin();
     StoreDTO updateStore(Long id,StoreDTO storeDTO);
-    StoreDTO deleteStore(Long id);
+    void deleteStore(Long id);
     StoreDTO getStoreByEmployee();
 
 

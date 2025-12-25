@@ -33,6 +33,8 @@ public class UserModal {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
+    @ManyToOne
+    private StoreModal store;
 
 
 }

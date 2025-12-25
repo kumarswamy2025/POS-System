@@ -1,6 +1,8 @@
 package com.possystem.mainapplication.exceptions.GlobalException;
 
+import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
+import jakarta.validation.constraints.Email;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,8 +38,17 @@ public class GlobalExceptionHandler {
 
         HashMap<String,String> map=new HashMap<>();
         map.put("message",ex.getMessage());
-
+        map.put("status", HttpStatus.NOT_FOUND.toString());
         return new ResponseEntity<>(map,HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(StoreException.class)
+    public ResponseEntity<?> StoreExceptionHandler(StoreException ex){
+        HashMap<String,String> map=new HashMap<>();
+
+        map.put("message",ex.getMessage());
+        map.put("status", ex.getStatus().toString());
+        return new ResponseEntity<>(map,ex.getStatus());
     }
 
 }
