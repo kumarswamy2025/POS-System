@@ -38,10 +38,10 @@ public class StoreServiceImplementation implements StoreService {
 //        we converting dto to entity
         StoreModal SM = modelMapper.map(storeDTO, StoreModal.class);
 
-        System.out.println("this model mapper  Store modal:" + SM);
+//        System.out.println("this model mapper  Store modal:" + SM);
 //        we converting entity to dto
         StoreDTO SD = modelMapper.map(SM, StoreDTO.class);
-        System.out.println("this model mapper  Store DTO:" + SD);
+//        System.out.println("this model mapper  Store DTO:" + SD);
 
 
 //        DTO to entity

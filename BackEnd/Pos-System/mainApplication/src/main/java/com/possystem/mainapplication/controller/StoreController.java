@@ -20,6 +20,7 @@ public class StoreController {
     private final StoreService storeService;
     private final UserService userService;
 
+//    tested
     @PostMapping("/create")
     public ResponseEntity<StoreDTO> createStore(@RequestBody StoreDTO storeDTO, @RequestHeader("Authorization") String jwt) {
 //         here we getting  user modal  with jwt
