@@ -71,10 +71,16 @@ public class StoreServiceImplementation implements StoreService {
     }
 
     @Override
-    public StoreModal getStoreByAdmin() {
+    public StoreDTO getStoreByAdmin() {
 //        note : one admin for one store
         UserModal admin = userService.getCurrentUser();
-        return storeRepo.findByStoreAdminId(admin.getID());
+        StoreModal storeModal=storeRepo.findByStoreAdminId(admin.getID());
+//        converting entitty to DTO
+        StoreDTO storeDTO=StoreMapper.toDTO(storeModal);
+
+
+
+        return storeDTO;
     }
 
     @Override
@@ -118,7 +124,19 @@ public class StoreServiceImplementation implements StoreService {
     public void deleteStore(Long id) {
 //        here we get store data
         //        note : one admin for one store
-        StoreModal store = getStoreByAdmin();
+        StoreDTO storeDTO=getStoreByAdmin();
+
+//        checking of store is present or not
+        if(storeDTO==null){
+            throw new StoreException("did not found store",HttpStatus.NOT_FOUND);
+        }
+
+
+//        here we get current logedin user data
+        UserModal user = userService.getCurrentUser();
+//        dto to entity
+
+        StoreModal store = StoreMapper.toEntity(storeDTO,user);
 
 //        delete store
         storeRepo.delete(store);

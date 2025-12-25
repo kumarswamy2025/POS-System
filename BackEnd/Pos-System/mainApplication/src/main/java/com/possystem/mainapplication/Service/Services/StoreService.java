@@ -12,7 +12,7 @@ public interface StoreService {
     StoreDTO createStore(StoreDTO storeDTO, UserModal userModal);
     StoreDTO getStoreById(Long id);
     List<StoreDTO> getAllStores();
-    StoreModal getStoreByAdmin();
+    StoreDTO getStoreByAdmin();
     StoreDTO updateStore(Long id,StoreDTO storeDTO);
     void deleteStore(Long id);
     StoreDTO getStoreByEmployee();
