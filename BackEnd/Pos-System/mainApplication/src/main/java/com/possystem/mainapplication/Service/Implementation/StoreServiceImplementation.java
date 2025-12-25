@@ -24,11 +24,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StoreServiceImplementation implements StoreService {
 
-    private final UserRepo userRepo;
+
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
     private final UserService userService;
-    private final StoreService storeService;
+
 
 
     @Override
@@ -76,7 +76,7 @@ public class StoreServiceImplementation implements StoreService {
     public StoreDTO getStoreByAdmin() {
 //        note : one admin for one store
         UserModal admin = userService.getCurrentUser();
-        StoreModal storeModal=storeRepo.findByStoreAdminId(admin.getID());
+        StoreModal storeModal=storeRepo.findByStoreAdminId(admin.getId());
 //        converting entitty to DTO
         StoreDTO storeDTO=StoreMapper.toDTO(storeModal);
 
@@ -90,7 +90,7 @@ public class StoreServiceImplementation implements StoreService {
 //        here we get current logedIn user data and stores are mapped by him we can edit it
         UserModal currentUser = userService.getCurrentUser();
 //        here we get stores mapped by users
-        StoreModal existingStore = storeRepo.findByStoreAdminId(currentUser.getID());
+        StoreModal existingStore = storeRepo.findByStoreAdminId(currentUser.getId());
 
         if (existingStore == null) {
             throw new StoreException("Store is not found..", HttpStatus.NOT_FOUND);

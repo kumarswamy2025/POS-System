@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class StoreDTO {
 
-    private Long Id;
+    private Long id;
 
     private String brand;
 

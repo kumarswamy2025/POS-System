@@ -18,7 +18,7 @@ public class UserModal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    private Long id;
 
     @Column(nullable = false)
     private String fullName;

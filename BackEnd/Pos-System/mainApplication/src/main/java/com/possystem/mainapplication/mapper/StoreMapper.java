@@ -11,7 +11,7 @@ public class StoreMapper {
 
     public static StoreDTO toDTO(StoreModal storeModal) {
         StoreDTO storeDTO = StoreDTO.builder()
-                .Id(storeModal.getId())
+                .id(storeModal.getId())
                 .brand(storeModal.getBrand())
                 .storeAdmin(UserMapper.toDTO(storeModal.getStoreAdmin()))
                 .createdAt(storeModal.getCreatedAt())
