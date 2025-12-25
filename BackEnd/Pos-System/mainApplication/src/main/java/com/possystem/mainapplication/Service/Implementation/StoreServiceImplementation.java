@@ -8,6 +8,7 @@ import com.possystem.mainapplication.payload.DTO.StoreDTO;
 import com.possystem.mainapplication.repository.StoreRepo;
 import com.possystem.mainapplication.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +19,28 @@ public class StoreServiceImplementation implements StoreService {
 
     private final UserRepo userRepo;
     private final StoreRepo storeRepo;
+    private final ModelMapper modelMapper;
 
 
     @Override
     public StoreDTO createStore(StoreDTO storeDTO, UserModal userModal) {
+
+//        here iam using model mapper
+//        we converting dto to entity
+        StoreModal SM = modelMapper.map(storeDTO, StoreModal.class);
+
+        System.out.println("this model mapper  Store modal:" + SM);
+//        we converting entity to dto
+        StoreDTO SD = modelMapper.map(SM, StoreDTO.class);
+        System.out.println("this model mapper  Store DTO:" + SD);
+
 
 //        DTO to entity
         StoreModal storeModal = StoreMapper.toEntity(storeDTO, userModal);
         StoreModal savedData = storeRepo.save(storeModal);
 
 //        entity to DTO
-        StoreDTO dto=StoreMapper.toDTO(savedData);
-
+        StoreDTO dto = StoreMapper.toDTO(savedData);
 
 
         return dto;
@@ -37,6 +48,7 @@ public class StoreServiceImplementation implements StoreService {
 
     @Override
     public StoreDTO getStoreById(Long id) {
+
         return null;
     }
 
