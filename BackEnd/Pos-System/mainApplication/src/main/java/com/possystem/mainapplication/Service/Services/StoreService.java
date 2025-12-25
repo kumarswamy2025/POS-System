@@ -1,5 +1,6 @@
 package com.possystem.mainapplication.Service.Services;
 
+import com.possystem.mainapplication.domain.StoreStatus;
 import com.possystem.mainapplication.modal.StoreModal;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.StoreDTO;
@@ -16,6 +17,7 @@ public interface StoreService {
     StoreDTO updateStore(Long id,StoreDTO storeDTO);
     void deleteStore(Long id);
     StoreDTO getStoreByEmployee();
+    StoreDTO moderateStore(Long id, StoreStatus storeStatus);
 
 
 

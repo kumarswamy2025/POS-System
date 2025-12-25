@@ -2,6 +2,7 @@ package com.possystem.mainapplication.Service.Implementation;
 
 import com.possystem.mainapplication.Service.Services.StoreService;
 import com.possystem.mainapplication.Service.Services.UserService;
+import com.possystem.mainapplication.domain.StoreStatus;
 import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import com.possystem.mainapplication.mapper.StoreMapper;
@@ -27,6 +28,7 @@ public class StoreServiceImplementation implements StoreService {
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final StoreService storeService;
 
 
     @Override
@@ -149,5 +151,22 @@ public class StoreServiceImplementation implements StoreService {
             throw new UserExceptions("you don't have permissions to access this store", HttpStatus.FORBIDDEN);
         }
         return StoreMapper.toDTO(currentUser.getStore());
+    }
+
+    @Override
+    public StoreDTO moderateStore(Long id, StoreStatus storeStatus) {
+
+//        Finding store
+        StoreModal storeModal=storeRepo.findById(id).orElseThrow(
+                ()-> new StoreException(" store not found...",HttpStatus.NOT_FOUND)
+        );
+
+//        update status
+        storeModal.setStatus(storeStatus);
+//        save store
+     StoreModal savedStore=   storeRepo.save(storeModal);
+
+        StoreDTO storeDTO=StoreMapper.toDTO(savedStore);
+        return storeDTO;
     }
 }

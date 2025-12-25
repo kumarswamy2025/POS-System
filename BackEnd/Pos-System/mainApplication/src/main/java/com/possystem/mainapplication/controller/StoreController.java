@@ -2,6 +2,7 @@ package com.possystem.mainapplication.controller;
 
 import com.possystem.mainapplication.Service.Services.StoreService;
 import com.possystem.mainapplication.Service.Services.UserService;
+import com.possystem.mainapplication.domain.StoreStatus;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.StoreDTO;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,12 @@ public class StoreController {
      }
 
 
+     @PutMapping("/modaratestore/{id}")
+    public ResponseEntity<StoreDTO> modarateStore(@PathVariable("id") Long id, @RequestParam("status")StoreStatus storeStatus){
+       StoreDTO dto= storeService.moderateStore(id,storeStatus);
+
+       return ResponseEntity.ok(dto);
+     }
 
 
 }
