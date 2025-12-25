@@ -28,7 +28,7 @@ public class StoreMapper {
     public static StoreModal toEntity(StoreDTO storeDTO, UserModal userModal){
         StoreModal storeModal=StoreModal.builder()
 //                here id is auto increment
-//                .Id(storeDTO.getId())
+                .id(storeDTO.getId())
                 .brand(storeDTO.getBrand())
                 .storeAdmin(userModal)
                 .createdAt(storeDTO.getCreatedAt())

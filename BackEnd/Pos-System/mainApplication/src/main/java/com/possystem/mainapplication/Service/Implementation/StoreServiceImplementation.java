@@ -77,6 +77,9 @@ public class StoreServiceImplementation implements StoreService {
 //        note : one admin for one store
         UserModal admin = userService.getCurrentUser();
         StoreModal storeModal=storeRepo.findByStoreAdminId(admin.getId());
+        if(storeModal==null){
+            throw new StoreException("Store not found ",HttpStatus.NOT_FOUND);
+        }
 //        converting entitty to DTO
         StoreDTO storeDTO=StoreMapper.toDTO(storeModal);
 
@@ -128,6 +131,7 @@ public class StoreServiceImplementation implements StoreService {
         //        note : one admin for one store
         StoreDTO storeDTO=getStoreByAdmin();
 
+        System.out.println("store dto: "+storeDTO);
 //        checking of store is present or not
         if(storeDTO==null){
             throw new StoreException("did not found store",HttpStatus.NOT_FOUND);
@@ -138,7 +142,14 @@ public class StoreServiceImplementation implements StoreService {
         UserModal user = userService.getCurrentUser();
 //        dto to entity
 
+        System.out.println("current user:"+user);
+
         StoreModal store = StoreMapper.toEntity(storeDTO,user);
+//        here id not assigned so this is error  it does not delete so we have to provide id
+//        store.setId(id);
+
+
+        System.out.println("store : "+store);
 
 //        delete store
         storeRepo.delete(store);
@@ -149,6 +160,11 @@ public class StoreServiceImplementation implements StoreService {
         UserModal currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             throw new UserExceptions("you don't have permissions to access this store", HttpStatus.FORBIDDEN);
+        }
+        System.out.println("current user : "+currentUser);
+
+        if(currentUser.getStore()==null){
+            throw new StoreException("no employees are mapped",HttpStatus.NOT_FOUND);
         }
         return StoreMapper.toDTO(currentUser.getStore());
     }
