@@ -44,5 +44,9 @@ public class Test {
         return "validator_class";
     }
 
+    public String demoBranch(){
+        return "demo branch";
+    }
+
 
 }
