@@ -50,5 +50,4 @@ public class StoreModal {
         updatedAt=LocalDateTime.now();
     }
 
-
 }
