@@ -11,7 +11,7 @@ public class StoreMapper {
 
     public static StoreDTO toDTO(StoreModal storeModal) {
         StoreDTO storeDTO = StoreDTO.builder()
-                .Id(storeModal.getId())
+                .id(storeModal.getId())
                 .brand(storeModal.getBrand())
                 .storeAdmin(UserMapper.toDTO(storeModal.getStoreAdmin()))
                 .createdAt(storeModal.getCreatedAt())
@@ -28,7 +28,7 @@ public class StoreMapper {
     public static StoreModal toEntity(StoreDTO storeDTO, UserModal userModal){
         StoreModal storeModal=StoreModal.builder()
 //                here id is auto increment
-//                .Id(storeDTO.getId())
+                .id(storeDTO.getId())
                 .brand(storeDTO.getBrand())
                 .storeAdmin(userModal)
                 .createdAt(storeDTO.getCreatedAt())

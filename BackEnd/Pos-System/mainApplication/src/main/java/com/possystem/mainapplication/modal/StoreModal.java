@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class StoreModal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
     @Column(nullable = false)
     private String brand;
     @OneToOne    // one storeAdmin belongs to one store

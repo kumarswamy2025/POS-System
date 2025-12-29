@@ -8,7 +8,7 @@ import com.possystem.mainapplication.payload.DTO.UserDTO;
 public class UserMapper {
     public static UserDTO toDTO(UserModal savedUser) {
         UserDTO userDTO=UserDTO.builder()
-                .ID(savedUser.getID())
+                .id(savedUser.getId())
                 .fullName(savedUser.getFullName())
                 .email(savedUser.getEmail())
                 .phone(savedUser.getPhone())

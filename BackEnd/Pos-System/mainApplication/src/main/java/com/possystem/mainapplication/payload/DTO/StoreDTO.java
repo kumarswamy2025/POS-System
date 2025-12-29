@@ -2,10 +2,7 @@ package com.possystem.mainapplication.payload.DTO;
 
 import com.possystem.mainapplication.domain.StoreStatus;
 import com.possystem.mainapplication.modal.StoreAddress;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.time.LocalDateTime;
@@ -13,9 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoreDTO {
 
-    private Long Id;
+    private Long id;
 
     private String brand;
 
