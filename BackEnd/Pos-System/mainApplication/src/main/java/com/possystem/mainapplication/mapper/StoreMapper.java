@@ -39,7 +39,11 @@ public class StoreMapper {
                 .contact(storeDTO.getContact())
                 .build();
 
+        // 🔥 THIS IS THE FIX — set owning side
+        userModal.setStore(storeModal);
 
+        // keep inverse side consistent
+        storeModal.getUsers().add(userModal);
 
         return storeModal;
 

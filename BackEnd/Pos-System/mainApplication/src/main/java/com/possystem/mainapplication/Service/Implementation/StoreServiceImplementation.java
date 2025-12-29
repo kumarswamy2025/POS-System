@@ -28,6 +28,7 @@ public class StoreServiceImplementation implements StoreService {
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final UserRepo userRepo;
 
 
 
@@ -36,11 +37,11 @@ public class StoreServiceImplementation implements StoreService {
 
 //        here iam using model mapper
 //        we converting dto to entity
-        StoreModal SM = modelMapper.map(storeDTO, StoreModal.class);
+//        StoreModal SM = modelMapper.map(storeDTO, StoreModal.class);
 
 //        System.out.println("this model mapper  Store modal:" + SM);
 //        we converting entity to dto
-        StoreDTO SD = modelMapper.map(SM, StoreDTO.class);
+//        StoreDTO SD = modelMapper.map(SM, StoreDTO.class);
 //        System.out.println("this model mapper  Store DTO:" + SD);
 
 
