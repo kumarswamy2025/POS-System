@@ -3,13 +3,19 @@ package com.possystem.mainapplication.Service.Implementation;
 import com.possystem.mainapplication.Service.Services.ProductService;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.ProductDTO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImplementation implements ProductService {
+
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO, UserModal userModal) {
+
         return null;
     }
 

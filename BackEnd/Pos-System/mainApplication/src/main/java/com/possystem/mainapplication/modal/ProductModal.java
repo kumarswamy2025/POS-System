@@ -30,7 +30,7 @@ public class ProductModal {
     private String image;
     //    category
     @ManyToOne
-    private StoreModal storeModal;
+    private StoreModal store;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
