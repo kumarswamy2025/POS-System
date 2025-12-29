@@ -22,4 +22,9 @@ public interface ProductRepo extends JpaRepository<ProductModal, Long> {
     List<ProductModal> searchByKeyword(@Param("storeId") Long storeId, @Param("query") String keyword);
 
 
+//    in this query we find product and with store id
+    @Query(
+            "select p from ProductModal p where p.id=:id and p.store.id=:storeId"
+    )
+    ProductModal findByIdAndByStoreId(@Param("id") Long id,@Param("storeId") Long storeId);
 }
