@@ -33,7 +33,8 @@ public class UserModal {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime lastLogin;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id") // FK lives here
     private StoreModal store;
 
 

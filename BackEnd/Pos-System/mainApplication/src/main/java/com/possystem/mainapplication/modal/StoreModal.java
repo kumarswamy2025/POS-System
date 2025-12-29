@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Setter
@@ -14,12 +16,18 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 public class StoreModal {
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @Builder.Default
+
+    private List<UserModal> users = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private String brand;
     @OneToOne    // one storeAdmin belongs to one store
+    @JoinColumn(name = "store_admin_id")
     private UserModal storeAdmin;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
