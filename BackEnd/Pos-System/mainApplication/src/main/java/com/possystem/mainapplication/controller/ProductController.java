@@ -57,8 +57,8 @@ public class ProductController {
     }
 
 
-    @GetMapping("/search/{id}")
-    public ResponseEntity<List<ProductDTO>> searchByKeyword(@RequestBody String keyword,@PathVariable("id") Long storeId){
+    @GetMapping("/store/{storeId}/search")
+    public ResponseEntity<List<ProductDTO>> searchByKeyword(@RequestBody String keyword,@PathVariable("storeId") Long storeId){
 
         return ResponseEntity.ok(productService.searchByKeyword(storeId,keyword));
     }
