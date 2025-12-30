@@ -15,5 +15,9 @@ public class CategoryDTO {
     private Long id;
     private String name;
 
-    private StoreModal store;
+//    private StoreModal store;
+    private Long storeId;
+
+
+
 }
