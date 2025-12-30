@@ -13,18 +13,17 @@ public interface ProductRepo extends JpaRepository<ProductModal, Long> {
     //    this is used to find store by id
     List<ProductModal> findByStoreId(Long storeId);
 
-//    this is used to find products by name , brand and sku
-    @Query("select p from ProductModal p " +
-            "where  p.store.id=:storeId and (" +
-                    "lower(p.name) like  lower(concat('%',:query,'%') ) " +
-                    " or lower(p.brand) like  lower(concat('%',:query,'%') ) " +
-                    " or lower(p.sku) like  lower(concat('%',:query,'%') ) "+")")
+    //    this is used to find products by name , brand and sku
+    @Query("select p from ProductModal p " + "where  p.store.id=:storeId and (" + "lower(p.name) like  lower(concat('%',:query,'%') ) " + " or lower(p.brand) like  lower(concat('%',:query,'%') ) " + " or lower(p.sku) like  lower(concat('%',:query,'%') ) " + ")")
     List<ProductModal> searchByKeyword(@Param("storeId") Long storeId, @Param("query") String keyword);
 
 
-//    in this query we find product and with store id
-    @Query(
-            "select p from ProductModal p where p.id=:id and p.store.id=:storeId"
-    )
-    ProductModal findByIdAndByStoreId(@Param("id") Long id,@Param("storeId") Long storeId);
+    //    in this query we find product with product id  and with store id
+    @Query("select p from ProductModal p where p.id=:id and p.store.id=:storeId")
+    ProductModal findByIdAndByStoreId(@Param("id") Long id, @Param("storeId") Long storeId);
+
+
+    //    in this query we get all products with store admin id
+    @Query("select p from ProductModal p where p.store.storeAdmin.id=:id ")
+    List<ProductModal> findProductsByAdminId(@Param("id") Long adminId);
 }

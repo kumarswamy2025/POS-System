@@ -1,5 +1,6 @@
 package com.possystem.mainapplication.exceptions.GlobalException;
 
+import com.possystem.mainapplication.exceptions.ProductException.ProductException;
 import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import jakarta.validation.constraints.Email;
@@ -44,6 +45,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(StoreException.class)
     public ResponseEntity<?> StoreExceptionHandler(StoreException ex){
+        HashMap<String,String> map=new HashMap<>();
+
+        map.put("message",ex.getMessage());
+        map.put("status", ex.getStatus().toString());
+        return new ResponseEntity<>(map,ex.getStatus());
+    }
+
+    @ExceptionHandler(ProductException.class)
+    public ResponseEntity<?> ProductExceptionHandler(ProductException ex){
         HashMap<String,String> map=new HashMap<>();
 
         map.put("message",ex.getMessage());

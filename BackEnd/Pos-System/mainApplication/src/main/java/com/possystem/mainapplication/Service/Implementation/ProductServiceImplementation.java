@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -119,8 +120,8 @@ public class ProductServiceImplementation implements ProductService {
 //        first check if product is present or not
         ProductModal productModal = productRepo.findByIdAndByStoreId(id, StoreId);
 
-        if(productModal==null){
-            throw  new ProductException("product is not found to attached store",HttpStatus.NOT_FOUND);
+        if (productModal == null) {
+            throw new ProductException("product is not found to attached store", HttpStatus.NOT_FOUND);
         }
 
 //        delete product
@@ -129,16 +130,48 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<ProductDTO> getProductsByStoreId(Long storeId) {
-        return List.of();
+        //        this method is used to all  get products in store
+//        here we receive list of products data modals
+        List<ProductModal> productModal = productRepo.findByStoreId(storeId);
+//        here we convert products modals into DTOs
+//        here we use streams
+        return productModal.stream().map(ProductMapper::toDTO).collect(Collectors.toList());
+
     }
 
     @Override
     public List<ProductDTO> searchByKeyword(Long storeId, String keyword) {
-        return List.of();
+
+//        here we receive list of products data modals
+        List<ProductModal> productModal = productRepo.searchByKeyword(storeId, keyword);
+//        here we convert products modals into DTOs
+//        here we use streams
+        return productModal.stream().map(ProductMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
     public ProductDTO getProductById(Long id, UserModal userModal) {
-        return null;
+        ProductModal productModal = productRepo.findById(id).orElseThrow(() -> new ProductException("product is not found..", HttpStatus.NOT_FOUND));
+
+        ProductDTO productDTO = ProductMapper.toDTO(productModal);
+
+        return productDTO;
     }
+
+    @Override
+    public List<ProductDTO> getProductsByAdminId(Long adminId) {
+
+//        checking if admin id null then use current user id as admin id
+        if (adminId == null) {
+            UserModal userModal = userService.getCurrentUser();
+            adminId = userModal.getId();
+        }
+
+//        this method is used to all  get products with admin id
+        List<ProductModal> productModal = productRepo.findProductsByAdminId(adminId);
+        return productModal.stream().map(ProductMapper::toDTO).collect(Collectors.toList());
+
+
+    }
+
 }

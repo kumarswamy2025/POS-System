@@ -19,4 +19,5 @@ public interface ProductService {
 
     ProductDTO getProductById(Long id, UserModal userModal);
 
+    List<ProductDTO> getProductsByAdminId(Long adminId);
 }
