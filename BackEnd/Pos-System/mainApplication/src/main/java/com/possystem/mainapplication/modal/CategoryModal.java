@@ -14,9 +14,7 @@ public class CategoryModal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "store_id")
     private StoreModal store;
