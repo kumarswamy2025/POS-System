@@ -48,5 +48,8 @@ public class Test {
         return "demo branch";
     }
 
+    public String t1(){
+        return "t1 method";
+    }
 
 }
