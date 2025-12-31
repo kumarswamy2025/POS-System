@@ -23,6 +23,7 @@ public class ProductDTO {
     private double sellingPrice;
     private String brand;
     private String image;
+    private CategoryDTO categoryDTO;
     private Long categoryId;
     private Long storeId;
     private LocalDateTime createdAt;

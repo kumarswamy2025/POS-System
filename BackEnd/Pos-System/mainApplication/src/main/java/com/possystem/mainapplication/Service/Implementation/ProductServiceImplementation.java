@@ -3,12 +3,15 @@ package com.possystem.mainapplication.Service.Implementation;
 import com.possystem.mainapplication.Service.Services.ProductService;
 import com.possystem.mainapplication.Service.Services.StoreService;
 import com.possystem.mainapplication.Service.Services.UserService;
+import com.possystem.mainapplication.exceptions.CategoryException.CategoryException;
 import com.possystem.mainapplication.exceptions.ProductException.ProductException;
 import com.possystem.mainapplication.mapper.ProductMapper;
+import com.possystem.mainapplication.modal.CategoryModal;
 import com.possystem.mainapplication.modal.ProductModal;
 import com.possystem.mainapplication.modal.StoreModal;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.ProductDTO;
+import com.possystem.mainapplication.repository.CategoryRepo;
 import com.possystem.mainapplication.repository.ProductRepo;
 import com.possystem.mainapplication.repository.StoreRepo;
 import com.possystem.mainapplication.repository.UserRepo;
@@ -26,6 +29,7 @@ public class ProductServiceImplementation implements ProductService {
     private final ProductRepo productRepo;
     private final StoreRepo storeRepo;
     private final UserRepo userRepo;
+    private final CategoryRepo categoryRepo;
 
     //    here we inject services
     private final UserService userService;
@@ -38,9 +42,12 @@ public class ProductServiceImplementation implements ProductService {
         //        first check if store is present or not
         StoreModal storeModal = storeRepo.findById(productDTO.getStoreId()).orElseThrow(() -> new ProductException("Store Not Found", HttpStatus.NOT_FOUND));
 
+        CategoryModal categoryModal=categoryRepo.findById(productDTO.getCategoryId()).orElseThrow(
+                ()-> new ProductException("category is not found in product creation..",HttpStatus.NOT_FOUND)
+        );
 
 //        converting dto to entity
-        ProductModal productModal = ProductMapper.toEntity(productDTO, storeModal);
+        ProductModal productModal = ProductMapper.toEntity(productDTO, storeModal,categoryModal);
 //        saveing data to DB
         ProductModal savedData = productRepo.save(productModal);
 //        converting modal to dto
@@ -64,6 +71,20 @@ public class ProductServiceImplementation implements ProductService {
             productModal.setStore(storeModal);
 
         }
+
+
+//        checking if category id is valid to update
+        if(productDTO.getCategoryId()!=null){
+//            checking catory id is valid
+            CategoryModal modal=categoryRepo.findById(productDTO.getCategoryId()).orElseThrow(
+                    ()-> new CategoryException("Category id is not valid to update category id ",HttpStatus.BAD_REQUEST)
+            );
+//            IF valid then update the categpry id
+            productModal.setCategory(modal);
+
+
+        }
+
 
 
 //      checking if name is not null then update it

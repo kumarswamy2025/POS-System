@@ -30,6 +30,9 @@ public class ProductModal {
     private String image;
     //    category
     @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryModal category;
+    @ManyToOne
     private StoreModal store;
 
     private LocalDateTime createdAt;

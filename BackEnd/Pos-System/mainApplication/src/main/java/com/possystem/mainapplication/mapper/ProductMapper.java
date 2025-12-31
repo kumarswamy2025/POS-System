@@ -1,5 +1,6 @@
 package com.possystem.mainapplication.mapper;
 
+import com.possystem.mainapplication.modal.CategoryModal;
 import com.possystem.mainapplication.modal.ProductModal;
 import com.possystem.mainapplication.modal.StoreModal;
 import com.possystem.mainapplication.payload.DTO.ProductDTO;
@@ -19,7 +20,8 @@ public class ProductMapper {
                 .storeId(productModal.getStore() != null ? productModal.getStore().getId() : null)
                 .createdAt(productModal.getCreatedAt())
                 .updatedAt(productModal.getUpdatedAt())
-//                .categoryId(productModal.getId())
+                .categoryId(productModal.getCategory().getId())
+                .categoryDTO(CategoryMapper.toDTO(productModal.getCategory()))
 
                 .build();
         return dto;
@@ -27,7 +29,7 @@ public class ProductMapper {
 
 
     //    dto to modal
-    public static ProductModal toEntity(ProductDTO productDTO, StoreModal storeModal) {
+    public static ProductModal toEntity(ProductDTO productDTO, StoreModal storeModal, CategoryModal categoryModal) {
         ProductModal modal = ProductModal.builder()
                 .name(productDTO.getName())
                 .sku(productDTO.getSku())
@@ -37,7 +39,7 @@ public class ProductMapper {
                 .brand(productDTO.getBrand())
                 .image(productDTO.getImage())
                 .store(storeModal)
-                //                .categoryId(productModal.getId())
+                .category(categoryModal)
                 .build();
         return modal;
     }
