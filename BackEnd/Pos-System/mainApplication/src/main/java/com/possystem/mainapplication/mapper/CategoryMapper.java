@@ -10,6 +10,8 @@ public class CategoryMapper {
         return CategoryDTO.builder()
                 .id(categoryModal.getId())
                 .name(categoryModal.getName())
+                .createdAt(categoryModal.getCreatedAt())
+                .updatedAt(categoryModal.getUpdatedAt())
                 .storeId(categoryModal.getStore()!=null?categoryModal.getStore().getId():null)
                 .build();
     }

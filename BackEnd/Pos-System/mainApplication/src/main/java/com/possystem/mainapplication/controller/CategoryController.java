@@ -22,7 +22,7 @@ public class CategoryController {
    public ResponseEntity<CategoryDTO> create(@RequestBody CategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryService.createCategory(categoryDTO));
     }
-
+    //    testing successfully
 //    get categories by store id
     @GetMapping("/storeid/{id}")
     public ResponseEntity<List<CategoryDTO>> getCategoriesByStoreId(@PathVariable("id") Long storeId) {
@@ -31,14 +31,14 @@ public class CategoryController {
 
     }
 
-
+    //    testing successfully
 //    used to update category
     @PutMapping("/update/{id}")
     public ResponseEntity<CategoryDTO> update(@PathVariable("id") long categoryId,@RequestBody  CategoryDTO categoryDTO){
 
                 return ResponseEntity.ok(categoryService.updateCategory(categoryId,categoryDTO));
     }
-
+    //    testing successfully
 //    used to delete category
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id){
@@ -49,12 +49,14 @@ public class CategoryController {
         res.put("message : ","Category  is deleted successfully..");
         return ResponseEntity.ok(res);
     }
-
+    //    testing successfully
+// used to delete category by store id
     @DeleteMapping("/deletebystoreid/{categoryid}/{storeid}")
     public  ResponseEntity<?> deleteCategoryByStoreId(@PathVariable("categoryid") Long categoryId,@PathVariable("storeid") Long storeid ){
         categoryService.deleteCategoryByStoreId(categoryId,storeid);
         HashMap<String, String> res=new HashMap<>();
         res.put("Category id :",""+categoryId);
+        res.put("Store id :",""+storeid);
         res.put("message : ","Category  is deleted successfully..");
         return ResponseEntity.ok(res);
     }

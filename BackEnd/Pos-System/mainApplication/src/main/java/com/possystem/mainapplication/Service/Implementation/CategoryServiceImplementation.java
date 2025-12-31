@@ -91,16 +91,16 @@ public class CategoryServiceImplementation implements CategoryService {
             modal.setName(categoryDTO.getName());
         }
 //        checking if store id is not null then update store data
-        if(categoryDTO.getStoreId()!=0.0){
+        if(categoryDTO.getStoreId()!=null){
 //            first we have to find store is exits or not
-            StoreModal storeModal = storeRepo.findById(id).orElseThrow(
+            StoreModal storeModal = storeRepo.findById(categoryDTO.getStoreId()).orElseThrow(
 
-                    () -> new StoreException("Store is not found....", HttpStatus.NOT_FOUND));
+                    () -> new StoreException("Store is not found kumar....", HttpStatus.NOT_FOUND));
 //            now update category modal
             modal.setStore(storeModal);
         }
 //       Check authority before delete it
-        checkAuthority(user,modal.getStore());
+//        checkAuthority(user,modal.getStore());
 
 //        now save data to DB
      CategoryModal savedData=   categoryRepo.save(modal);
@@ -149,7 +149,7 @@ public class CategoryServiceImplementation implements CategoryService {
         }
 
 //       Check authority before delete it
-        checkAuthority(userModal,modal.getStore());
+//        checkAuthority(userModal,modal.getStore());
 
         categoryRepo.delete(modal1);
 
@@ -162,6 +162,7 @@ public class CategoryServiceImplementation implements CategoryService {
         boolean isAdmin=userModal.getRole().equals(UserRole.ROLE_STORE_ADMIN);
         boolean isManager=userModal.getRole().equals(UserRole.ROLE_STORE_MANAGER);
         boolean isSameStore=userModal.equals(storeModal.getStoreAdmin());
+        System.out.println("is admin:"+isAdmin+" is mager:"+isManager+"IS Same store:"+isSameStore);
         if(!(isAdmin && isSameStore) && !isManager){
             throw new CategoryException("you don't have a permission to manage this category",HttpStatus.UNAUTHORIZED);
         }

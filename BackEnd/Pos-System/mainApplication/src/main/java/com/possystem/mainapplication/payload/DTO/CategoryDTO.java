@@ -4,6 +4,8 @@ import com.possystem.mainapplication.modal.StoreModal;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @Getter
 @Setter
@@ -17,6 +19,8 @@ public class CategoryDTO {
 
 //    private StoreModal store;
     private Long storeId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 
 
