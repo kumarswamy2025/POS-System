@@ -16,6 +16,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+//    testing successfully
     //    creating category
     @PostMapping("/create")
    public ResponseEntity<CategoryDTO> create(@RequestBody CategoryDTO categoryDTO) {
