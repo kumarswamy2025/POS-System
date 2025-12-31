@@ -143,6 +143,11 @@ public class CategoryServiceImplementation implements CategoryService {
 
 //        NOW delete category belongs to that store
         CategoryModal modal1=categoryRepo.findCategoryByIdAndStoreId(id,storeId);
+
+        if(modal1==null){
+            throw  new CategoryException("category is not found in respected store please check once ",HttpStatus.NOT_FOUND);
+        }
+
 //       Check authority before delete it
         checkAuthority(userModal,modal.getStore());
 
