@@ -20,8 +20,8 @@ public class ProductDTO {
 //    SKU IS UNIQ STRING
     private String sku;
     private String description;
-    private double mrp;
-    private double sellingPrice;
+    private Double mrp;
+    private Double sellingPrice;
     private String brand;
     private String image;
     private CategoryDTO categoryDTO;

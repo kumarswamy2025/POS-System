@@ -24,8 +24,8 @@ public class ProductModal {
     @Column(nullable = false, unique = true)
     private String sku;
     private String description;
-    private double mrp;
-    private double sellingPrice;
+    private Double mrp;
+    private Double sellingPrice;
     private String brand;
     private String image;
     //    category

@@ -27,15 +27,16 @@ public class ProductController {
         UserModal userModal=userService.getUserFromJWTToken(jwt);
      return   ResponseEntity.ok(productService.createProduct(productDTO,userModal));
     }
-
+    //    testing successfully
 //    update product
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @RequestHeader("Authorization") String jwt, @PathVariable("id") Long productId){
         //        here we extract user data from jwt
         UserModal userModal=userService.getUserFromJWTToken(jwt);
         return ResponseEntity.ok(productService.updateProduct(productId,productDTO,userModal));
     }
 
+    //    testing successfully
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id,@RequestHeader("Authorization") String jwt){
         //        here we extract user data from jwt
@@ -52,23 +53,24 @@ public class ProductController {
     }
 
 
+    //    testing successfully
     @GetMapping("/storeid/{id}")
     public ResponseEntity<List<ProductDTO>> getProductsByStoreId(@PathVariable("id") Long storeId){
         return ResponseEntity.ok(productService.getProductsByStoreId(storeId));
     }
 
-
-    @GetMapping("/store/{storeId}/search")
-    public ResponseEntity<List<ProductDTO>> searchByKeyword(@RequestBody String keyword,@PathVariable("storeId") Long storeId){
+    //    testing successfully
+    @GetMapping("/store/{storeId}/search/{keyword}")
+    public ResponseEntity<List<ProductDTO>> searchByKeyword(@PathVariable("keyword") String keyword,@PathVariable("storeId") Long storeId){
 
         return ResponseEntity.ok(productService.searchByKeyword(storeId,keyword));
     }
-
+    //    testing successfully
     @GetMapping("/product/{id}")
     public ResponseEntity<ProductDTO> productById(@PathVariable("id") Long productId){
         return ResponseEntity.ok(productService.getProductById(productId,null));
     }
-
+    //    testing successfully
     @GetMapping("/productsbyadminid/{id}")
     public ResponseEntity<List<ProductDTO>> getProductsByAdminId(@PathVariable("id") Long adminId){
         return ResponseEntity.ok(productService.getProductsByAdminId(adminId));

@@ -102,12 +102,12 @@ public class ProductServiceImplementation implements ProductService {
             productModal.setDescription(productDTO.getDescription());
         }
         //      checking if mrp is not null then update it
-        if (productDTO.getMrp() != 0.0) {
+        if (productDTO.getMrp() !=null) {
             productModal.setMrp(productDTO.getMrp());
         }
 
         //      checking if sellingPrice is not null then update it
-        if (productDTO.getSellingPrice() != 0.0) {
+        if (productDTO.getSellingPrice() != null) {
             productModal.setSellingPrice(productDTO.getSellingPrice());
         }
         //      checking if brand is not null then update it
@@ -138,6 +138,9 @@ public class ProductServiceImplementation implements ProductService {
         Long StoreId = userModal1.getStore().getId();
 //        here we get
 
+        if(StoreId==null){
+            throw new ProductException("store id is not found in user modal",HttpStatus.NOT_FOUND);
+        }
         //        here we get store id from client
 //        first check if product is present or not
         ProductModal productModal = productRepo.findByIdAndByStoreId(id, StoreId);
@@ -191,6 +194,9 @@ public class ProductServiceImplementation implements ProductService {
 
 //        this method is used to all  get products with admin id
         List<ProductModal> productModal = productRepo.findProductsByAdminId(adminId);
+        if(productModal.isEmpty()){
+            throw new ProductException("not products mapped to the user",HttpStatus.BAD_REQUEST);
+        }
         return productModal.stream().map(ProductMapper::toDTO).collect(Collectors.toList());
 
 
