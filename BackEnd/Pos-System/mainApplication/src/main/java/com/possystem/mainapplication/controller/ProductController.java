@@ -19,6 +19,7 @@ public class ProductController {
     private final ProductService productService;
     private final UserService userService;
 
+    //    testing successfully
 //    create product
     @PostMapping("/create")
     public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO, @RequestHeader("Authorization") String jwt){

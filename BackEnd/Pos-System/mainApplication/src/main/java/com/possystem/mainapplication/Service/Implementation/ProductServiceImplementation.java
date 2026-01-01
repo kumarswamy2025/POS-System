@@ -42,6 +42,7 @@ public class ProductServiceImplementation implements ProductService {
         //        first check if store is present or not
         StoreModal storeModal = storeRepo.findById(productDTO.getStoreId()).orElseThrow(() -> new ProductException("Store Not Found", HttpStatus.NOT_FOUND));
 
+//        checking if store is exits or not
         CategoryModal categoryModal=categoryRepo.findById(productDTO.getCategoryId()).orElseThrow(
                 ()-> new ProductException("category is not found in product creation..",HttpStatus.NOT_FOUND)
         );

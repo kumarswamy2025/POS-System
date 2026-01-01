@@ -17,6 +17,7 @@ public class ProductDTO {
 
     private Long id;
     private String name;
+//    SKU IS UNIQ STRING
     private String sku;
     private String description;
     private double mrp;
