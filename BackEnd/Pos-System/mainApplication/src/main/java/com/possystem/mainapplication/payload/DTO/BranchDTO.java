@@ -28,7 +28,8 @@ public class BranchDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private StoreDTO store;
-    private String storeId;
-    private UserDTO managerId;
+    private Long storeId;
+    private UserDTO manager;
+    private Long managerId;
 
 }
