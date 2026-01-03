@@ -20,7 +20,7 @@ public class BranchMapper {
                 .createdAt(branchModal.getCreatedAt())
                 .updatedAt(branchModal.getUpdatedAt())
                 .store(StoreMapper.toDTO(storeModal))
-                .storeId(storeModal.getId())
+                .storeId(branchModal.getStore()!=null? branchModal.getStore().getId():null)
                 .manager(UserMapper.toDTO(userModal))
                 .managerId(userModal.getId())
                 .build();
@@ -37,8 +37,8 @@ public class BranchMapper {
                 .workingDays(branchDTO.getWorkingDays())
                 .openTime(branchDTO.getOpenTime())
                 .closeTime(branchDTO.getCloseTime())
-                .updatedAt(branchDTO.getUpdatedAt())
-                .createdAt(branchDTO.getCreatedAt())
+//                .updatedAt(branchDTO.getUpdatedAt())
+//                .createdAt(branchDTO.getCreatedAt())
                 .store(storeModal)
                 .manager(userModal)
                 .build();
