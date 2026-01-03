@@ -1,8 +1,6 @@
 package com.possystem.mainapplication.mapper;
 
-import com.possystem.mainapplication.modal.CategoryModal;
-import com.possystem.mainapplication.modal.InventoryModal;
-import com.possystem.mainapplication.modal.StoreModal;
+import com.possystem.mainapplication.modal.*;
 import com.possystem.mainapplication.payload.DTO.BranchDTO;
 import com.possystem.mainapplication.payload.DTO.InventoryDTO;
 import com.possystem.mainapplication.payload.DTO.ProductDTO;
@@ -22,10 +20,10 @@ public class InventoryMapper {
         return dto;
     }
 
-    public static  InventoryModal toEntity(InventoryDTO inventoryDTO, StoreModal storeModal, CategoryModal categoryModal){
+    public static  InventoryModal toEntity(InventoryDTO inventoryDTO, BranchModal branchModal, ProductModal productModal){
         InventoryModal modal=InventoryModal.builder()
-                .branch(BranchMapper.toEntity(inventoryDTO.getBranch(),null,null))
-                .product(ProductMapper.toEntity(inventoryDTO.getProduct(),storeModal,categoryModal))
+                .branch(branchModal)
+                .product(productModal)
                 .quantity(inventoryDTO.getQuantity())
                 .lastUpdated(inventoryDTO.getLastUpdated())
                 .build();
