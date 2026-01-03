@@ -32,7 +32,7 @@ public class BranchController {
     public ResponseEntity<BranchDTO> getBranchById(@PathVariable("id") Long id){
         return ResponseEntity.ok(branchService.getBranchById(id));
     }
-    //    tested successfully
+    //    tested successfully"
 //    update branch
     @PutMapping("/update/{id}")
     public ResponseEntity<BranchDTO> updateBranch(@PathVariable("id") Long id,@RequestBody BranchDTO  branchDTO,@RequestHeader("Authorization") String jwt){
