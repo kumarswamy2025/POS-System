@@ -9,6 +9,7 @@ public interface StoreRepo extends JpaRepository<StoreModal,Long> {
 //    StoreModal findByAdminId(Long adminId);
 
     StoreModal findByStoreAdminId(Long id);
-    @Query("select s from StoreModal  s where s.storeAdmin.id=:id")
+
+    @Query("select s from StoreModal  s where s.id=:id")
     StoreModal findByStoreIdKumar(@Param("id") Long id);
 }
