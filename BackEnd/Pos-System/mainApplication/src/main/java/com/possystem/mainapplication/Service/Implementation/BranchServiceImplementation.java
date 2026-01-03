@@ -12,6 +12,7 @@ import com.possystem.mainapplication.payload.DTO.BranchDTO;
 import com.possystem.mainapplication.repository.BranchRepo;
 import com.possystem.mainapplication.repository.StoreRepo;
 import com.possystem.mainapplication.repository.UserRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,9 @@ public class BranchServiceImplementation implements BranchService {
 
 //       create branch entity
         BranchModal branchModal = BranchMapper.toEntity(branchDTO, storeModal, userModal);
-//        save entity
+branchModal.setStore(storeModal);
+branchModal.setManager(currentUser);
+        //        save entity
         BranchModal savedData = branchRepo.save(branchModal);
 
 //        converting entity to dto
@@ -152,6 +155,7 @@ public class BranchServiceImplementation implements BranchService {
     }
 
     @Override
+    @Transactional
     public void deleteBranch(Long id) {
 //        checking if branch id is exits or not
         BranchModal branchModal=branchRepo.findById(id).orElseThrow(

@@ -26,13 +26,13 @@ public class BranchController {
 
         return ResponseEntity.ok(branchService.createBranch(branchDTO,currentUser));
     }
-
+    //    tested successfully
 //    get branch  by id
     @GetMapping("/branch/{id}")
     public ResponseEntity<BranchDTO> getBranchById(@PathVariable("id") Long id){
         return ResponseEntity.ok(branchService.getBranchById(id));
     }
-
+    //    tested successfully
 //    update branch
     @PutMapping("/update/{id}")
     public ResponseEntity<BranchDTO> updateBranch(@PathVariable("id") Long id,@RequestBody BranchDTO  branchDTO,@RequestHeader("Authorization") String jwt){
@@ -40,12 +40,14 @@ public class BranchController {
 
         return ResponseEntity.ok(branchService.updateBranch(id,branchDTO,currentUser));
     }
-//    get all branches by store id
+
+    //    tested successfully
+    //    get all branches by store id
     @GetMapping("/store/{storeId}")
     public ResponseEntity<List<BranchDTO>> getAllBranchesByStoreId(@PathVariable("storeId") Long storeId){
         return ResponseEntity.ok(branchService.getAllBranchesByStoreId(storeId));
     }
-
+    //    tested successfully
 //    delete branch
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteBranch(@PathVariable("id") Long id){

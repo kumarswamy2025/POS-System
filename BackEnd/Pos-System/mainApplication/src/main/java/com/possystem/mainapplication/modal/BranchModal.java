@@ -41,7 +41,8 @@ public class BranchModal {
 
 //   one branch have one manager
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
+//            (cascade = CascadeType.REMOVE)
     @JoinColumn(name = "manager_id")
     private UserModal manager;
 

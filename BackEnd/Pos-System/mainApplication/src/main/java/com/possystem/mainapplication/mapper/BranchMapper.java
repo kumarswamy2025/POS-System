@@ -39,8 +39,8 @@ public class BranchMapper {
                 .closeTime(branchDTO.getCloseTime())
 //                .updatedAt(branchDTO.getUpdatedAt())
 //                .createdAt(branchDTO.getCreatedAt())
-                .store(storeModal)
-                .manager(userModal)
+//                .store(storeModal)
+//                .manager(userModal)
                 .build();
 
         return entity;
