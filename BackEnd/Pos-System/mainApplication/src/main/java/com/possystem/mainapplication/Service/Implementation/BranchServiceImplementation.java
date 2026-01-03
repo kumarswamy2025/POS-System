@@ -45,7 +45,7 @@ public class BranchServiceImplementation implements BranchService {
             throw new BranchException("store is not found....", HttpStatus.NOT_FOUND);
         }
 //        checking if branchDTO.getStoreId()  is mathed with storeModal.getId()
-        if (storeModal.getId() != branchDTO.getStoreId()) {
+        if ((branchDTO.getId() != null) && (storeModal.getId() != branchDTO.getStoreId())) {
             throw new BranchException("store id is not matched to user mapped store please check once ", HttpStatus.BAD_REQUEST);
         }
 

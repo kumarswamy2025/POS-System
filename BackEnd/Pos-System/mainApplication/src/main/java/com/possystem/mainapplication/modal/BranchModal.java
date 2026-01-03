@@ -33,7 +33,7 @@ public class BranchModal {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    //   many branches belongs to one branch
+    //   many branches belongs to one store
 //    one store have many branches
     @ManyToOne
     @JoinColumn(name = "store_id")

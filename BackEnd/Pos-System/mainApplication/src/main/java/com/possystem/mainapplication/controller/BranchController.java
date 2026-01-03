@@ -18,6 +18,7 @@ public class BranchController {
     private final BranchService branchService;
     private final UserService userService;
 
+//    tested successfully
 //    create branch
     @PostMapping("/create")
     public ResponseEntity<BranchDTO> create(@RequestBody  BranchDTO branchDTO, @RequestHeader("Authorization") String jwt){
@@ -40,7 +41,7 @@ public class BranchController {
         return ResponseEntity.ok(branchService.updateBranch(id,branchDTO,currentUser));
     }
 //    get all branches by store id
-    @GetMapping("/store/{storeId")
+    @GetMapping("/store/{storeId}")
     public ResponseEntity<List<BranchDTO>> getAllBranchesByStoreId(@PathVariable("storeId") Long storeId){
         return ResponseEntity.ok(branchService.getAllBranchesByStoreId(storeId));
     }
