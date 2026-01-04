@@ -121,7 +121,7 @@ public class InventoryServiceImplementation implements InventoryService {
     public InventoryDTO getInventoryByProductIdAndBranchId(Long productId, Long branchId) {
         InventoryModal modal=inventoryRepo.findByProductIdAndBranchId(productId,branchId);
         if(modal==null){
-            throw new InventoryException("no modals are found..",HttpStatus.NOT_FOUND);
+            throw new InventoryException("no inventory are found..",HttpStatus.NOT_FOUND);
         }
 //        modal to dto
         InventoryDTO dto=InventoryMapper.toDTO(modal,null);
