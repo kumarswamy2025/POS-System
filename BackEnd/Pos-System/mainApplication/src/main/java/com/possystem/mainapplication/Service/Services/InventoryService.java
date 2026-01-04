@@ -9,7 +9,7 @@ public interface InventoryService {
     InventoryDTO createInventory(InventoryDTO inventoryDTO);
     InventoryDTO updateInventory(Long id,InventoryDTO inventoryDTO);
     void deleteInventory(Long id);
-    InventoryDTO getInventory(Long id);
+    InventoryDTO getInventoryById(Long id);
     List<InventoryDTO> getInventoryByProductId(Long productId);
     List<InventoryDTO> getInventoryByBranchId(Long branchId);
     InventoryDTO getInventoryByProductIdAndBranchId(Long productId,Long branchId);

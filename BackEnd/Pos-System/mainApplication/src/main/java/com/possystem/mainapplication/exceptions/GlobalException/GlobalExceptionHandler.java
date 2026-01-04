@@ -2,6 +2,7 @@ package com.possystem.mainapplication.exceptions.GlobalException;
 
 import com.possystem.mainapplication.exceptions.BranchException.BranchException;
 import com.possystem.mainapplication.exceptions.CategoryException.CategoryException;
+import com.possystem.mainapplication.exceptions.InventoryException.InventoryException;
 import com.possystem.mainapplication.exceptions.ProductException.ProductException;
 import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
@@ -78,4 +79,13 @@ public class GlobalExceptionHandler {
         map.put("status", ex.getStatus().toString());
         return new ResponseEntity<>(map,ex.getStatus());
     }
+    @ExceptionHandler(InventoryException.class)
+    public ResponseEntity<?> InventoryExceptionHandler(InventoryException ex){
+        HashMap<String,String> map=new HashMap<>();
+
+        map.put("message",ex.getMessage());
+        map.put("status", ex.getStatus().toString());
+        return new ResponseEntity<>(map,ex.getStatus());
+    }
+
 }
