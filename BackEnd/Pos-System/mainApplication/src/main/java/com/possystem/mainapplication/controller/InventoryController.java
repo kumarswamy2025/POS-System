@@ -21,12 +21,10 @@ public class InventoryController {
 
         return ResponseEntity.ok(inventoryService.createInventory(inventoryDTO));
     }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<InventoryDTO> update(@RequestBody InventoryDTO inventoryDTO,@PathVariable("id") Long id){
         return ResponseEntity.ok(inventoryService.updateInventory(id,inventoryDTO));
     }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
         inventoryService.deleteInventory(id);
@@ -35,20 +33,15 @@ public class InventoryController {
 
         res.put("message : ","Inventory  is deleted successfully..");
         return ResponseEntity.ok(res);
-
-
     }
-
     @GetMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> getInventoryById(@PathVariable("id") Long id){
         return ResponseEntity.ok(inventoryService.getInventoryById(id));
     }
-
     @GetMapping("/inventorybyproduct/{productid}")
     public ResponseEntity<List<InventoryDTO>> getInventoryByProductId(@PathVariable("productid") Long productId){
         return ResponseEntity.ok(inventoryService.getInventoryByProductId(productId));
     }
-
     @GetMapping("/inventorybyproduct/{branchid}")
     public ResponseEntity<List<InventoryDTO>> getInventoryByBranchId(@PathVariable("branchid") Long branchId){
         return ResponseEntity.ok(inventoryService.getInventoryByBranchId(branchId));
@@ -58,13 +51,11 @@ public class InventoryController {
     public ResponseEntity<InventoryDTO> getInventoryByProductIdAndBranchId(@PathVariable("productid") Long productId,@PathVariable("branchid") Long branchId){
         return ResponseEntity.ok(inventoryService.getInventoryByProductIdAndBranchId(productId,branchId));
     }
-
     @GetMapping("/allinventories")
     public ResponseEntity<List<InventoryDTO>> getAllInventories(){
         return ResponseEntity.ok(inventoryService.getAllInventories());
 
     }
-
 
 
 }
