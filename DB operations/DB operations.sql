@@ -15,6 +15,8 @@ select * from product_modal ;
 select * from store_modal;
 select * from branch_modal;
 select * from branch_modal_working_days;
+select * from  inventory_modal;
+
 
 
 
