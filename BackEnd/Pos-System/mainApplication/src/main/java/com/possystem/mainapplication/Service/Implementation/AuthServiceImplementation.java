@@ -50,9 +50,9 @@ public class AuthServiceImplementation implements AuthService {
         }
 
 //        here we checking if user ready to create ROLE_ADMIN so we have to throw an exception
-        if (userDTO.getRole().equals(UserRole.ROLE_ADMIN)) {
-            throw new UserExceptions("role admin is not allowed...", HttpStatus.FORBIDDEN);
-        }
+//        if (userDTO.getRole().equals(UserRole.ROLE_ADMIN)) {
+//            throw new UserExceptions("role admin is not allowed...", HttpStatus.FORBIDDEN);
+//        }
 
 //        creating new user
 // here iam using builder patterns to make objects simple

@@ -3,7 +3,6 @@ package com.possystem.mainapplication.Service.Services;
 import com.possystem.mainapplication.domain.UserRole;
 import com.possystem.mainapplication.modal.UserModal;
 import com.possystem.mainapplication.payload.DTO.UserDTO;
-
 import java.util.List;
 
 public interface EmployeeService {
