@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    UserDTO createEmployee(UserDTO userDTO,Long storeId);
+    UserDTO createStoreEmployee(UserDTO userDTO,Long storeId);
     UserDTO createBranchEmployee(UserDTO userDTO,Long branchId);
-    UserModal updateEmployee(Long employeeId,UserModal employeeDetails);
+
+    //    update an emoloyee when role is ROLE_BRANCH_MANAGER, ROLE_BRANCH_ADMIN, ROLE_STORE_MANAGER,ROLE_STORE_ADMIN
+    UserModal updateEmployee(Long employeeId, UserDTO employeeDetails);
+
     void  deleteEmployee(Long employeeId);
     List<UserModal> findStoreEmployees(Long storeId, UserRole userRole);
     List<UserModal> findBranchEmployees(Long branchId,UserRole userRole);

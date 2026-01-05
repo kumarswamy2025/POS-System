@@ -38,6 +38,9 @@ public class UserModal {
     @JoinColumn(name = "store_id") // FK lives here
     private StoreModal store;
     private UserStatus userStatus;
+    @ManyToOne
+    @JoinColumn(name = "branch_id")
+    private BranchModal branch;
 
 
     // Runs ONLY when new user is inserted

@@ -21,4 +21,16 @@ public class UserMapper {
 
 
     }
+
+    public static UserModal toEntity(UserDTO userDTO){
+        UserModal entity=UserModal.builder()
+                .fullName(userDTO.getFullName())
+                .email(userDTO.getEmail())
+                .phone(userDTO.getPhone())
+//                .role()
+//                .password(userDTO.getPassword())
+                                .build();
+
+    return entity;
+    }
 }
