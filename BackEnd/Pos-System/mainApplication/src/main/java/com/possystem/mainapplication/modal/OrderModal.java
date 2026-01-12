@@ -34,6 +34,10 @@ public class OrderModal {
     @Column(name = "customerId")
     private CustomerModal customer;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
 
+    }
 
 }
