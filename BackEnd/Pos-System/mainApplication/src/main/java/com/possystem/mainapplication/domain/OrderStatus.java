@@ -1,4 +1,6 @@
 package com.possystem.mainapplication.domain;
 
-public class OrderStatus {
+public enum OrderStatus {
+    PENDING,
+    COMPLETED
 }
