@@ -5,6 +5,7 @@ import com.possystem.mainapplication.exceptions.CategoryException.CategoryExcept
 import com.possystem.mainapplication.exceptions.CustomerException.CustomerException;
 import com.possystem.mainapplication.exceptions.EmployeException.EmployeeException;
 import com.possystem.mainapplication.exceptions.InventoryException.InventoryException;
+import com.possystem.mainapplication.exceptions.OrderException.OrderException;
 import com.possystem.mainapplication.exceptions.ProductException.ProductException;
 import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
@@ -106,6 +107,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(map,ex.getStatus());
     }
 
+    @ExceptionHandler(OrderException.class)
+    public ResponseEntity<?> OrderExceptionHandler(OrderException ex){
+        HashMap<String,String> map=new HashMap<>();
+
+        map.put("message",ex.getMessage());
+        map.put("status", ex.getStatus().toString());
+        return new ResponseEntity<>(map,ex.getStatus());
+    }
 
 
 }
