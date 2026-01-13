@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
-public class OrderModal {
+    public class OrderModal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,6 +7,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Getter
 @Setter
@@ -18,5 +20,8 @@ public class OrderItemsDTO {
     private Integer quantity;
     private Double price;
     private ProductDTO product;
+    private Long productId;
     private Long orderId;
+
+
 }

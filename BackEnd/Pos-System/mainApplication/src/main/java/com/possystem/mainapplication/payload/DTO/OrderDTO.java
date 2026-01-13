@@ -27,7 +27,7 @@ public class OrderDTO {
     private BranchDTO branch;
     private Long branchId;
     private Long customerId;
-
+    private PaymentType paymentType;
     private UserDTO cashier;
     private CustomerModal customer;
 
