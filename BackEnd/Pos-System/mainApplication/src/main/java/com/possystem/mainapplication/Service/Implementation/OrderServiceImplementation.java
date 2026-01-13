@@ -35,6 +35,7 @@ public class OrderServiceImplementation implements OrderService {
     private final UserService userService;
     private final OrderRepo orderRepo;
     private final CustomerResp customerResp;
+    private final OrderItemsRepo orderItemsRepo;
 
 
     @Override
@@ -62,12 +63,14 @@ public class OrderServiceImplementation implements OrderService {
                     ProductModal productModal = productRepo.findById(itemDto.getProductId()).orElseThrow(
                             () -> new OrderItemsException("product is not found...", HttpStatus.NOT_FOUND)
                     );
-                    return OrderItemsModal.builder()
+                    OrderItemsModal orderItemsModal= OrderItemsModal.builder()
                             .product(productModal)
                             .quantity(itemDto.getQuantity())
                             .price(productModal.getSellingPrice() * itemDto.getQuantity())
                             .order(orderModal)
                             .build();
+
+                 return    orderItemsRepo.save(orderItemsModal);
 
                 }
         ).toList();
