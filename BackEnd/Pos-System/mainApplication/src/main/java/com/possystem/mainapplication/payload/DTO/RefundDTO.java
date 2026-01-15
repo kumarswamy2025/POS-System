@@ -27,6 +27,7 @@ public class RefundDTO {
 //    private ShiftReportDTO shiftReport;
     private Long shiftReportId;
     private UserDTO cashier;
+    private  String cashierName;
     private BranchDTO branch;
     private Long branchId;
     private LocalDateTime createdAt;
