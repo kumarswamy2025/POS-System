@@ -8,6 +8,7 @@ import com.possystem.mainapplication.exceptions.InventoryException.InventoryExce
 import com.possystem.mainapplication.exceptions.OrderException.OrderException;
 import com.possystem.mainapplication.exceptions.OrderItemsException.OrderItemsException;
 import com.possystem.mainapplication.exceptions.ProductException.ProductException;
+import com.possystem.mainapplication.exceptions.RefundException.RefundException;
 import com.possystem.mainapplication.exceptions.StoreException.StoreException;
 import com.possystem.mainapplication.exceptions.UserException.UserExceptions;
 import jakarta.validation.constraints.Email;
@@ -118,6 +119,16 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(OrderItemsException.class)
     public ResponseEntity<?> OrderItemsExceptionHandler(OrderItemsException ex){
+        HashMap<String,String> map=new HashMap<>();
+
+        map.put("message",ex.getMessage());
+        map.put("status", ex.getStatus().toString());
+        return new ResponseEntity<>(map,ex.getStatus());
+    }
+
+
+    @ExceptionHandler(RefundException.class)
+    public ResponseEntity<?> RefundExceptionHandler(RefundException ex){
         HashMap<String,String> map=new HashMap<>();
 
         map.put("message",ex.getMessage());
