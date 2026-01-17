@@ -17,23 +17,24 @@ import java.util.List;
 @NoArgsConstructor
 public class ShiftReportDTO {
     private Long id;
-
     private LocalDateTime shiftStart;
     private LocalDateTime shiftEnd;
     private Double totalSale;
     private Double totalRefund;
     private Double netSale;
     private int totalOrders;
-    @ManyToOne
-    private UserModal cashier;
-    @ManyToOne
-    private BranchModal branch;
-    @Transient
+
+    private UserDTO cashier;
+    private Long cashierId;
+
+    private BranchDTO branch;
+    private Long BranchId;
+
     private List<PaymentSummary> PaymentSummaries;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ProductModal> topSellingProducts;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<OrderModal> recentOrders;
-    @OneToMany(mappedBy = "shiftReport",cascade = CascadeType.ALL)
-    private List<RefundModal> refunds;
+
+    private List<ProductDTO> topSellingProducts;
+
+    private List<OrderDTO> recentOrders;
+
+    private List<RefundDTO> refunds;
 }
