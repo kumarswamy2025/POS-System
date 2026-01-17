@@ -2,9 +2,9 @@ package com.possystem.mainapplication.exceptions.ShiftReportException;
 
 import org.springframework.http.HttpStatus;
 
-public class ShirtReportException extends RuntimeException {
+public class ShiftReportException extends RuntimeException {
     private HttpStatus status;
-    public ShirtReportException(String message, HttpStatus status) {
+    public ShiftReportException(String message, HttpStatus status) {
         super(message);
         this.status = status;
     }
