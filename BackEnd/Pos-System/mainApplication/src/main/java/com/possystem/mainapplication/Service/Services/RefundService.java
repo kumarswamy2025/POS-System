@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RefundService {
-    RefundDTO createRefund(RefundModal refundModal);
+    RefundDTO createRefund(RefundDTO refundModal);
     List<RefundDTO> getAllRefunds();
-    RefundDTO getRefundByCashier(Long cashierId);
-    RefundDTO getRefundByShiftReport(Long shiftReportId);
+    List<RefundDTO> getRefundByCashier(Long cashierId);
+    List<RefundDTO> getRefundByShiftReport(Long shiftReportId);
     List<RefundDTO> getRefundByCashierAndDateRange(Long cashierId, LocalDateTime startDate,LocalDateTime EndDate);
 
     List<RefundDTO> getRefundByBranch(Long branchId);
