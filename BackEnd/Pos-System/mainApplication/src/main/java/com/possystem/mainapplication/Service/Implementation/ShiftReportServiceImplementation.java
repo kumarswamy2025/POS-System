@@ -35,10 +35,10 @@ public class ShiftReportServiceImplementation implements ShiftReportService {
 
 
     @Override
-    public ShiftReportDTO startShift(Long cashierId, Long branchId, LocalDateTime shiftStart) {
+    public ShiftReportDTO startShift() {
 
         UserModal currentUser = userService.getCurrentUser();
-        shiftStart = LocalDateTime.now();
+      LocalDateTime  shiftStart = LocalDateTime.now();
 
         LocalDateTime startOfDay = shiftStart.withHour(0).withMinute(0).withSecond(0);
 
@@ -59,7 +59,7 @@ public class ShiftReportServiceImplementation implements ShiftReportService {
 
         ShiftReportModal savedData = shiftReportRepo.save(shiftReportModal);
 
-        return ShiftReportMapper.toDTO(shiftReportModal);
+        return ShiftReportMapper.toDTO(savedData);
     }
 
     @Override

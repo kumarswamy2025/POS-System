@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShiftReportService {
 
-    ShiftReportDTO startShift(Long cashierId, Long branchId, LocalDateTime startTime);
+    ShiftReportDTO startShift();
 
     ShiftReportDTO endShift(Long shiftReportId,LocalDateTime shiftEnd);
 
